@@ -22,3 +22,11 @@ void bst_free(bst* bst) {
   free(bst->buckets);
   bst->buckets = 0;
 }
+int bst_hash(void* key, int keysize) {
+  int hash = 0;
+  for (int i = 0; i < keysize; i++) {
+    char c = *(char*)(key + i);
+    hash += c * 3 * i;
+  }
+  return hash;
+}
