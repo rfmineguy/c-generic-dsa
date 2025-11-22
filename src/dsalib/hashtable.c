@@ -21,6 +21,7 @@ void ht_free(ht* ht) {
   }
   free(ht->buckets);
   ht->buckets = 0;
+  ht->buckets_count = 0;
 }
 int ht_hash(void* key, int keysize) {
   int hash = 0;
