@@ -111,5 +111,23 @@ MunitResult ht_test_put(const MunitParameter params[], void* user_data_or_fixtur
 }
 
 MunitResult ht_test_iterator(const MunitParameter params[], void* user_data_or_fixture) {
+  ht h = ht_new(10);
+
+  // 1. put the test_pairs into the table
+  for (int i = 0; i < 200; i++) {
+    ht_list_node *n = ht_put(&h, test_pairs[i].key, test_pairs[i].value);
+  }
+
+  // 2. assert that the table contains all of the test_pairs using the iterator
+  struct {int i; ht_iter it; } v;
+  for (v.it = ht_begin(&h), v.i = 0; !ht_end(&h, v.it); v.it = ht_next(&h, v.it), v.i++) {
+    int i = 0;
+    for (i = 0; i < 200; i++) {
+      if (strcmp(test_pairs[i].key, v.it.node->key) == 0 && test_pairs[i].value == v.it.node->value) break;
+    }
+    munit_assert_int(i, !=, 200);
+    munit_assert_string_equal(v.it.node->key, test_pairs[i].key);
+    munit_assert_int(v.it.node->value, ==, test_pairs[i].value);
+  }
   return MUNIT_OK;
 }
