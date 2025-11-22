@@ -10,9 +10,14 @@ DSA_LIB_OBJECTS := $(patsubst $(DSA_LIB_SRCDIR)/%.c, $(DSA_LIB_OUTDIR)/%.c.o, $(
 DRIVER_SRCDIR := src/driver
 DRIVER_SOURCES := $(DRIVER_SRCDIR)/main.c
 
+# tests
+TESTS_SRC_DIR := tests
+TESTS_SOURCES := $(TESTS_SRC_DIR)/*.c
+
 .PHONY: always clean
 .PHONY: build_static
 .PHONY: build_driver
+.PHONY: build_tests run_tests
 
 ## ========================
 ##  Utility targets
@@ -44,4 +49,13 @@ build_driver: always $(OUT_DIR)/driver
 
 $(OUT_DIR)/driver: $(DRIVER_SOURCES) | $(OUT_DIR)/libdsa.a
 	$(CC) $^ -o $@ -L$(OUT_DIR) -ldsa -I$(DSA_LIB_SRCDIR)
+## ========================
+
+## ========================
+##  Tests build
+## ========================
+build_tests: always $(OUT_DIR)/test
+
+$(OUT_DIR)/test: $(TESTS_SOURCES) | $(OUT_DIR)/libdsa.a
+	$(CC) -o $@ $^ -L$(OUT_DIR) -ldsa -I$(DSA_LIB_SRCDIR)
 ## ========================
