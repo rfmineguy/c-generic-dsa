@@ -46,3 +46,37 @@ bst_list_node* bst_put(bst *bst, const char* key, int value) {
   new->next = n;
   return new;
 }
+bst_iter bst_begin(bst *bst) {
+  for (int i = 0; i < bst->buckets_count; i++) {
+    if (bst->buckets[i]) {
+      return (bst_iter) {.bucket = i, .node = bst->buckets[i], .idx = 0};
+    }
+  }
+  return (bst_iter) {.node = 0};
+}
+
+bool bst_end(bst* bst, bst_iter it) {
+  return it.node == 0;
+}
+
+bst_iter bst_next(bst *bst, bst_iter it) {
+  // go to next node in bucket
+  if (it.node && it.node->next) {
+    it.node = it.node->next;
+    it.idx++;
+    return it;
+  }
+
+  // find next bucket with something in it
+  int i;
+  for (i = it.bucket + 1; i < bst->buckets_count; i++) {
+    if (bst->buckets[i]) {
+      it.bucket = i;
+      it.node = bst->buckets[i];
+      break;
+    }
+  }
+  if (i == bst->buckets_count) return (bst_iter){.node = 0};
+  it.idx++;
+  return it;
+}
