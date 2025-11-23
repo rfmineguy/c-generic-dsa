@@ -58,9 +58,18 @@ int* ht_get(ht *ht, const char* key) {
 void ht_rem(ht *ht, const char* key) {
   int hash = ht_hash((void*)key, strlen(key)) % ht->buckets_count;
   ht_list_node* n = ht->buckets[hash];
-  if (!n) return;
+
+  // Find node with key
   while (n && strcmp(n->key, key) != 0) n = n->next;
-  if (n) {
+  if (n == 0) return;
+
+  // If the node is the head
+  if (!n->prev) {
+    ht->buckets[hash] = n->next;
+    free(n);
+    return;
+  }
+  else if (n) {
     n->prev->next = n->next;
     free(n);
   }

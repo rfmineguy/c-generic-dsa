@@ -4,6 +4,7 @@ MunitTest ht[] = {
   { "/new",      ht_test_new, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
   { "/free",     ht_test_free, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
   { "/put",      ht_test_put, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/rem",      ht_test_remove, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
   { "/iterator", ht_test_iterator, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
   { NULL, NULL, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL }
 };

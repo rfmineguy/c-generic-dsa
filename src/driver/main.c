@@ -17,5 +17,7 @@ int main() {
      printf("%d, (%s, %d)\n", it.idx, it.node->key, it.node->value);
   }
 
+  ht_rem(&b, "akjf");
+
   ht_free(&b);
 }

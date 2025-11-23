@@ -14,6 +14,8 @@ DRIVER_SOURCES := $(DRIVER_SRCDIR)/main.c
 TESTS_SRC_DIR := tests
 TESTS_SOURCES := $(TESTS_SRC_DIR)/*.c
 
+CFLAGS := -ggdb
+
 .PHONY: always clean
 .PHONY: build_static
 .PHONY: build_driver
@@ -39,7 +41,7 @@ $(OUT_DIR)/libdsa.a: $(DSA_LIB_OBJECTS)
 	ar rcs $@ $^
 
 $(DSA_LIB_OUTDIR)/%.c.o: $(DSA_LIB_SRCDIR)/%.c
-	$(CC) -c $^ -o $@
+	$(CC) -c $^ -o $@ $(CFLAGS)
 ## ========================
 
 ## ========================
@@ -48,7 +50,7 @@ $(DSA_LIB_OUTDIR)/%.c.o: $(DSA_LIB_SRCDIR)/%.c
 build_driver: always $(OUT_DIR)/driver
 
 $(OUT_DIR)/driver: $(DRIVER_SOURCES) | $(OUT_DIR)/libdsa.a
-	$(CC) $^ -o $@ -L$(OUT_DIR) -ldsa -I$(DSA_LIB_SRCDIR)
+	$(CC) $^ -o $@ -L$(OUT_DIR) $(CFLAGS) -ldsa -I$(DSA_LIB_SRCDIR)
 ## ========================
 
 ## ========================
@@ -57,5 +59,5 @@ $(OUT_DIR)/driver: $(DRIVER_SOURCES) | $(OUT_DIR)/libdsa.a
 build_tests: always $(OUT_DIR)/test
 
 $(OUT_DIR)/test: $(TESTS_SOURCES) | $(OUT_DIR)/libdsa.a
-	$(CC) -o $@ $^ -L$(OUT_DIR) -ldsa -I$(DSA_LIB_SRCDIR)
+	$(CC) -o $@ $^ -L$(OUT_DIR) -ldsa $(CFLAGS) -I$(DSA_LIB_SRCDIR)
 ## ========================
