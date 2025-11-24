@@ -16,3 +16,25 @@ void ll_free(linkedlist* ll) {
   ll->head = 0;
   ll->tail = 0;
 }
+
+int ll_pushback(linkedlist* ll, int val) {
+  linkedlist_node* n = calloc(1, sizeof(linkedlist_node));
+  if (!n) return 1;
+  n->val = val;
+
+  if (!ll->head && !ll->tail) {
+    ll->head = n;
+    ll->tail = ll->head;
+    return 0;
+  }
+  if (ll->head == ll->tail) {
+    n->prev = ll->tail;
+    ll->tail->next = n;
+    ll->tail = n;
+    return 0;
+  }
+  n->prev = ll->tail;
+  ll->tail->next = n;
+  ll->tail = n;
+  return 0;
+}
