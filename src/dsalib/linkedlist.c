@@ -73,3 +73,16 @@ linkedlist_node* ll_popback(linkedlist* ll) {
   ll->tail->next = 0;
   return n;
 }
+linkedlist_node* ll_popfront(linkedlist* ll) {
+  if (!ll->head) return 0;
+  if (ll->head == ll->tail) {
+    linkedlist_node *n = ll->head;
+    ll->head = 0;
+    ll->tail = 0;
+    return n;
+  }
+  linkedlist_node* n = ll->head;
+  ll->head = ll->head->next;
+  ll->head->prev = 0;
+  return n;
+}
