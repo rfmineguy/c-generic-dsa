@@ -59,3 +59,17 @@ int ll_pushfront(linkedlist* ll, int val) {
   ll->head = n;
   return 0;
 }
+
+linkedlist_node* ll_popback(linkedlist* ll) {
+  if (!ll->head) return 0;
+  if (ll->head == ll->tail) {
+    linkedlist_node *n = ll->head;
+    ll->head = 0;
+    ll->tail = 0;
+    return n;
+  }
+  linkedlist_node* n = ll->tail;
+  ll->tail = ll->tail->prev;
+  ll->tail->next = 0;
+  return n;
+}
