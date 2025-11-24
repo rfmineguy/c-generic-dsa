@@ -8,4 +8,13 @@ MunitResult ht_test_put(const MunitParameter[], void*);
 MunitResult ht_test_remove(const MunitParameter[], void*);
 MunitResult ht_test_iterator(const MunitParameter[], void*);
 
+MunitResult ll_test_new(const MunitParameter[], void*);
+MunitResult ll_test_free(const MunitParameter[], void*);
+MunitResult ll_test_pushback(const MunitParameter[], void*);
+MunitResult ll_test_pushfront(const MunitParameter[], void*);
+MunitResult ll_test_popback(const MunitParameter[], void*);
+MunitResult ll_test_popfront(const MunitParameter[], void*);
+MunitResult ll_test_search(const MunitParameter[], void*);
+MunitResult ll_test_empty(const MunitParameter [], void*);
+
 #endif

@@ -9,8 +9,26 @@ MunitTest ht[] = {
   { NULL, NULL, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL }
 };
 
+MunitTest ll[] = {
+  { "/new",      ll_test_new, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/free",     ll_test_free, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/pushback", ll_test_pushback, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/pushfront",ll_test_pushfront, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/popback",  ll_test_popback, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/pushback", ll_test_pushback, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/search",   ll_test_search, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/empty",    ll_test_empty, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { NULL, NULL, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL }
+};
+
+MunitSuite all_suites[] = {
+  { "/ht", ht, NULL, 1, MUNIT_SUITE_OPTION_NONE },
+  { "/ll", ll, NULL, 1, MUNIT_SUITE_OPTION_NONE },
+  {NULL, NULL, NULL, 0, MUNIT_SUITE_OPTION_NONE},
+};
+
 MunitSuite suite = {
-  "/ht", ht, NULL, 1, MUNIT_SUITE_OPTION_NONE
+  "/dsa", NULL, all_suites, 1, MUNIT_SUITE_OPTION_NONE
 };
 
 int main(int argc, char** argv) {
