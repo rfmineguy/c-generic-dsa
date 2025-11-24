@@ -91,3 +91,15 @@ linkedlist_node* ll_search(linkedlist* ll, int v) {
   while (n && n->val != v) n = n->next;
   return n;
 }
+int ll_count(linkedlist* ll) {
+  int count = 0;
+  linkedlist_node* n = ll->head;
+  while (n) {
+    count++;
+    n = n->next;
+  }
+  return count;
+}
+bool ll_empty(linkedlist* ll) {
+  return ll->head == 0;
+}
