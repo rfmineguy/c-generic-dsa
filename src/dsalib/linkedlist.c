@@ -86,3 +86,8 @@ linkedlist_node* ll_popfront(linkedlist* ll) {
   ll->head->prev = 0;
   return n;
 }
+linkedlist_node* ll_search(linkedlist* ll, int v) {
+  linkedlist_node* n = ll->head;
+  while (n && n->val != v) n = n->next;
+  return n;
+}
