@@ -43,3 +43,6 @@ int* q_front(const queue* q) {
   if (!q->head) return 0;
   return &q->head->val;
 }
+bool q_empty(const queue* q) {
+  return q->head == q->tail && !q->head;
+}
