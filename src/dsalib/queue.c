@@ -17,3 +17,18 @@ void q_free(queue* q) {
   q->head = 0;
   q->tail = 0;
 }
+queue_node* q_enqueue(queue* q, int val) {
+  queue_node* n = calloc(1, sizeof(queue_node));
+  if (!n) return 0;
+  n->val = val;
+
+  if (!q->head) {
+    q->head = n;
+    q->tail = n;
+    return n;
+  }
+  n->prev = q->tail;
+  q->tail->next = n;
+  q->tail = n;
+  return n;
+}
