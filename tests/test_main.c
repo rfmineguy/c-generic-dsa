@@ -15,15 +15,25 @@ MunitTest ll[] = {
   { "/pushback", ll_test_pushback, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
   { "/pushfront",ll_test_pushfront, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
   { "/popback",  ll_test_popback, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
-  { "/pushback", ll_test_pushback, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/popfront", ll_test_popfront, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
   { "/search",   ll_test_search, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
   { "/empty",    ll_test_empty, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { NULL, NULL, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL }
+};
+
+MunitTest q[] = {
+  { "/new",      q_test_new, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/free",     q_test_free, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/enqueue",  q_test_enqueue, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/dequeue",  q_test_dequeue, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/front",    q_test_front, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
   { NULL, NULL, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL }
 };
 
 MunitSuite all_suites[] = {
   { "/ht", ht, NULL, 1, MUNIT_SUITE_OPTION_NONE },
   { "/ll", ll, NULL, 1, MUNIT_SUITE_OPTION_NONE },
+  { "/q",  q,  NULL, 1, MUNIT_SUITE_OPTION_NONE },
   {NULL, NULL, NULL, 0, MUNIT_SUITE_OPTION_NONE},
 };
 
