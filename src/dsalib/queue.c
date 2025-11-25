@@ -39,3 +39,7 @@ queue_node* q_dequeue(queue* q) {
   if (!q->head) q->tail = 0;
   return n;
 }
+int* q_front(const queue* q) {
+  if (!q->head) return 0;
+  return &q->head->val;
+}
