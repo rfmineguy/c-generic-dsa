@@ -4,7 +4,8 @@ OUT_DIR := out
 DSA_LIB_OUTDIR  := $(OUT_DIR)/dsalib
 DSA_LIB_SRCDIR  := src/dsalib
 DSA_LIB_SOURCES := $(DSA_LIB_SRCDIR)/hashtable.c\
-									 $(DSA_LIB_SRCDIR)/linkedlist.c
+									 $(DSA_LIB_SRCDIR)/linkedlist.c\
+									 $(DSA_LIB_SRCDIR)/queue.c
 DSA_LIB_OBJECTS := $(patsubst $(DSA_LIB_SRCDIR)/%.c, $(DSA_LIB_OUTDIR)/%.c.o, $(DSA_LIB_SOURCES))
 
 # driver
