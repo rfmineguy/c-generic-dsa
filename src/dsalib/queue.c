@@ -46,3 +46,10 @@ int* q_front(const queue* q) {
 bool q_empty(const queue* q) {
   return q->head == q->tail && !q->head;
 }
+void q_print(queue* q) {
+  for (queue_node* n = q->head; n != q->tail; n = n->next) {
+    printf("%d", n->val);
+    if (n->next) printf(", ");
+  }
+  printf("\n");
+}
