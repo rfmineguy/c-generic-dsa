@@ -32,3 +32,10 @@ queue_node* q_enqueue(queue* q, int val) {
   q->tail = n;
   return n;
 }
+queue_node* q_dequeue(queue* q) {
+  if (!q->head) return 0;
+  queue_node* n = q->head;
+  q->head = q->head->next;
+  if (!q->head) q->tail = 0;
+  return n;
+}
