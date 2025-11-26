@@ -5,7 +5,8 @@ OUT ?= out
 DSA_IMPL_LIB_OUTDIR := $(OUT)/libdsaimpl
 
 DSA_IMPL_LIB_SOURCES := $(THIS_DIR)/queue_int.c\
-                        $(THIS_DIR)/queue_avl_node.c
+                        $(THIS_DIR)/queue_avl_node.c\
+                        $(THIS_DIR)/ht_str_int.c
 
 DSA_IMPL_LIB_OBJECTS := $(patsubst $(THIS_DIR)/%.c, $(DSA_IMPL_LIB_OUTDIR)/%.c.o, $(DSA_IMPL_LIB_SOURCES))
 
