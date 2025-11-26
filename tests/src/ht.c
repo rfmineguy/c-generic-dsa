@@ -1,5 +1,5 @@
 #include "tests.h"
-#include "../src/dsalib/hashtable.h"
+#include "../../dsaimpls/ht_str_int.h"
 
 typedef struct {
   const char* key;
@@ -71,7 +71,7 @@ test_pair test_pairs[200] = {
 };
 
 MunitResult ht_test_new(const MunitParameter params[], void* user_data_or_fixture) {
-  ht h = ht_new(10);
+  ht_str_int h = ht_str_int_new(10);
   munit_assert_int(h.buckets_count, ==, 10);
   for (int i = 0; i < h.buckets_count; i++) {
     munit_assert_null(h.buckets[i]);
@@ -80,9 +80,9 @@ MunitResult ht_test_new(const MunitParameter params[], void* user_data_or_fixtur
 }
 
 MunitResult ht_test_free(const MunitParameter params[], void* user_data_or_fixture) {
-  ht h = ht_new(10);
-  ht_put(&h, "something", 4);
-  ht_free(&h);
+  ht_str_int h = ht_str_int_new(10);
+  ht_str_int_put(&h, "something", 4);
+  ht_str_int_free(&h);
 
   munit_assert_null(h.buckets);
   munit_assert_int(h.buckets_count, ==, 0);
@@ -91,15 +91,15 @@ MunitResult ht_test_free(const MunitParameter params[], void* user_data_or_fixtu
 }
 
 MunitResult ht_test_put(const MunitParameter params[], void* user_data_or_fixture) {
-  ht h = ht_new(10);
+  ht_str_int h = ht_str_int_new(10);
   // 1. put the test_pairs into the table 
   for (int i = 0; i < TEST_PAIR_COUNT; i++) {
-    ht_list_node *n = ht_put(&h, test_pairs[i].key, test_pairs[i].value);
+    ht_str_int_list_node *n = ht_str_int_put(&h, test_pairs[i].key, test_pairs[i].value);
   }
 
   // 2. assert that the table contains all of the test_pairs
   for (int i = 0; i < TEST_PAIR_COUNT; i++) {
-    ht_list_node* found = 0;
+    ht_str_int_list_node* found = 0;
     for (int j = 0; j < h.buckets_count; j++) {
       found = h.buckets[j];
       while (found && strcmp(found->key, test_pairs[i].key) != 0) found = found->next;
@@ -111,20 +111,20 @@ MunitResult ht_test_put(const MunitParameter params[], void* user_data_or_fixtur
 }
 
 MunitResult ht_test_remove(const MunitParameter params[], void* user_data_or_fixture) {
-  ht h = ht_new(10);
+  ht_str_int h = ht_str_int_new(10);
   // 1. put the test_pairs into the table 
   for (int i = 0; i < TEST_PAIR_COUNT; i++) {
-    ht_list_node *n = ht_put(&h, test_pairs[i].key, test_pairs[i].value);
+    ht_str_int_list_node *n = ht_str_int_put(&h, test_pairs[i].key, test_pairs[i].value);
   }
 
   // 2. remove the test_pairs from the table
   for (int i = 0; i < TEST_PAIR_COUNT; i++) {
-    ht_rem(&h, test_pairs[i].key);
+    ht_str_int_rem(&h, test_pairs[i].key);
   }
 
   // 3. assert that the table contains none of the test_pairs
   for (int i = 0; i < TEST_PAIR_COUNT; i++) {
-    ht_list_node* found = 0;
+    ht_str_int_list_node* found = 0;
     for (int j = 0; j < h.buckets_count; j++) {
       found = h.buckets[j];
       while (found && strcmp(found->key, test_pairs[i].key) != 0) found = found->next;
@@ -137,16 +137,16 @@ MunitResult ht_test_remove(const MunitParameter params[], void* user_data_or_fix
 }
 
 MunitResult ht_test_iterator(const MunitParameter params[], void* user_data_or_fixture) {
-  ht h = ht_new(10);
+  ht_str_int h = ht_str_int_new(10);
 
   // 1. put the test_pairs into the table
   for (int i = 0; i < 200; i++) {
-    ht_list_node *n = ht_put(&h, test_pairs[i].key, test_pairs[i].value);
+    ht_str_int_list_node *n = ht_str_int_put(&h, test_pairs[i].key, test_pairs[i].value);
   }
 
   // 2. assert that the table contains all of the test_pairs using the iterator
-  struct {int i; ht_iter it; } v;
-  for (v.it = ht_begin(&h), v.i = 0; !ht_end(&h, v.it); v.it = ht_next(&h, v.it), v.i++) {
+  struct {int i; ht_str_int_iter it; } v;
+  for (v.it = ht_str_int_begin(&h), v.i = 0; !ht_str_int_end(&h, v.it); v.it = ht_str_int_next(&h, v.it), v.i++) {
     int i = 0;
     for (i = 0; i < 200; i++) {
       if (strcmp(test_pairs[i].key, v.it.node->key) == 0 && test_pairs[i].value == v.it.node->value) break;
