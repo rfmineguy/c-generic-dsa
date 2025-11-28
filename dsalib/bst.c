@@ -45,3 +45,40 @@ static struct bst_node()* bstfunc(bst, search_node)(struct bst_node()* root, bst
   if (cmp < 0) return bstfunc(bst, search_node)(root->left, v);
   return bstfunc(bst, search_node)(root->right, v);
 }
+
+static struct bst_node()* bstfunc(bst, delete_node)(struct bst_node()** root, bst_type_type v) {
+  if (!(*root)) return 0;
+  int cmp = bstfunc(bst, cmp)(v, (*root)->val);
+
+  if (cmp < 0)      return bstfunc(bst, delete_node)(&(*root)->left, v);
+  else if (cmp > 0) return bstfunc(bst, delete_node)(&(*root)->right, v);
+  else {
+    struct bst_node() *target = (*root);
+    if ((*root)->count > 1) {
+      (*root)->count--;
+      return *root;
+    }
+    if ((*root)->left && (*root)->right) {
+      struct bst_node() **left = &(*root)->left;
+      while ((*left)->right)
+        left = &(*left)->right;
+
+      bst_type_type v = (*left)->val;
+      (*left)->val = (*root)->val;
+      (*root)->val = v;
+
+      *left = (*left)->left;
+      return target;
+    }
+    if ((*root)->left && !(*root)->right) {
+      (*root) = (*root)->left;
+      return target;
+    }
+    if (!(*root)->left && (*root)->right) {
+      (*root) = (*root)->right;
+      return target;
+    }
+    *root = 0;
+    return target;
+  }
+}
