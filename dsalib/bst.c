@@ -118,3 +118,10 @@ static void bstfunc(bst, print_node)(struct bst_node()* root, int depth, int is_
       var(bst, rec_depth)[depth] = 0;
     }
 }
+
+bst() bstfunc(bst, new)() {
+  return (bst()){.root = 0};
+}
+void  bstfunc(bst, free)(bst()* b) {
+  bstfunc(bst, free_node)(&b->root);
+}
