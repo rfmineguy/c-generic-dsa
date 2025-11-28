@@ -23,3 +23,16 @@ static void bstfunc(bst, free_node)(struct bst_node()** n) {
   free((*n));
   *n = 0;
 }
+
+static void bstfunc(bst, insert_node)(struct bst_node()** root, bst_type_type v) {
+  if (!(*root)) {
+    *root = calloc(1, sizeof(struct bst_node()));
+    (*root)->val = v;
+    (*root)->count = 1;
+    return;
+  }
+  int cmp = bstfunc(bst, cmp)(v, (*root)->val);
+  if (cmp == 0) (*root)->count++;
+  if (cmp < 0) bstfunc(bst, insert_node)(&(*root)->left, v);
+  if (cmp > 0) bstfunc(bst, insert_node)(&(*root)->right, v);
+}
