@@ -125,3 +125,21 @@ bst() bstfunc(bst, new)() {
 void  bstfunc(bst, free)(bst()* b) {
   bstfunc(bst, free_node)(&b->root);
 }
+
+void bstfunc(bst, insert)(bst()* b, bst_type_type v) {
+  bstfunc(bst, insert_node)(&b->root, v);
+}
+void bstfunc(bst, delete)(bst()* b, bst_type_type v) {
+  bstfunc(bst, delete_node)(&b->root, v);
+}
+bst_type_type* bstfunc(bst, search)(bst()* b, bst_type_type v) {
+  struct bst_node()* n = bstfunc(bst, search_node)(b->root, v);
+  if (!n) return 0;
+  return &n->val;
+}
+void bstfunc(bst, print)(bst()* b) {
+  memset(var(bst, rec_depth), 0, 1000);
+  printf("------------\n");
+  if (b->root)  bstfunc(bst, print_node)(b->root, 0, 1);
+  printf("------------\n");
+}
