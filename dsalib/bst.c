@@ -36,3 +36,12 @@ static void bstfunc(bst, insert_node)(struct bst_node()** root, bst_type_type v)
   if (cmp < 0) bstfunc(bst, insert_node)(&(*root)->left, v);
   if (cmp > 0) bstfunc(bst, insert_node)(&(*root)->right, v);
 }
+
+static struct bst_node()* bstfunc(bst, search_node)(struct bst_node()* root, bst_type_type v) {
+  if (!root) return 0;
+
+  int cmp = bstfunc(bst, cmp)(v, root->val);
+  if (cmp == 0) return root;
+  if (cmp < 0) return bstfunc(bst, search_node)(root->left, v);
+  return bstfunc(bst, search_node)(root->right, v);
+}
