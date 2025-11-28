@@ -82,3 +82,39 @@ static struct bst_node()* bstfunc(bst, delete_node)(struct bst_node()** root, bs
     return target;
   }
 }
+
+static void bstfunc(bst, print_node)(struct bst_node()* root, int depth, int is_last) {
+    if (!root) return;
+
+    for (int i = 0; i < depth; i++) {
+        if (i == depth - 1) {
+            // bottom connector
+            printf("%s", is_last ? "└──" : "├──");
+        } else {
+            // ancestor levels
+            printf("%s", var(bst, rec_depth)[i] ? "│  " : "   ");
+        }
+    }
+
+    bstfunc(bst, print_val)(root->val);
+    printf(" (%d)\n", root->count);
+
+    // Mark whether at this depth we should draw a vertical continuation later
+    if (depth >= 0) var(bst, rec_depth)[depth] = !is_last;
+
+    // Count children to determine who is last
+    int has_left  = root->left  != NULL;
+    int has_right = root->right != NULL;
+
+    if (has_left) {
+      var(bst, rec_depth)[depth] = has_right ? 1 : 0;
+      bstfunc(bst, print_node)(root->left, depth + 1, has_right ? 0 : 1);
+      var(bst, rec_depth)[depth] = 0;
+    }
+
+    if (has_right) {
+      var(bst, rec_depth)[depth] = 0;
+      bstfunc(bst, print_node)(root->right, depth + 1, 1); // right child is always last
+      var(bst, rec_depth)[depth] = 0;
+    }
+}
