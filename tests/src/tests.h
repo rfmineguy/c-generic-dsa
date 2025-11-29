@@ -17,11 +17,17 @@ MunitResult ht_test_iterator(const MunitParameter[], void*);
 // MunitResult ll_test_search(const MunitParameter[], void*);
 // MunitResult ll_test_empty(const MunitParameter [], void*);
 
-MunitResult q_test_new(const MunitParameter [], void*);
-MunitResult q_test_free(const MunitParameter [], void*);
-MunitResult q_test_enqueue(const MunitParameter [], void*);
-MunitResult q_test_dequeue(const MunitParameter [], void*);
-MunitResult q_test_front(const MunitParameter [], void*);
+MunitResult q_int_test_new(const MunitParameter [], void*);
+MunitResult q_int_test_free(const MunitParameter [], void*);
+MunitResult q_int_test_enqueue(const MunitParameter [], void*);
+MunitResult q_int_test_dequeue(const MunitParameter [], void*);
+MunitResult q_int_test_front(const MunitParameter [], void*);
+
+MunitResult q_str_test_new(const MunitParameter [], void*);
+MunitResult q_str_test_free(const MunitParameter [], void*);
+MunitResult q_str_test_enqueue(const MunitParameter [], void*);
+MunitResult q_str_test_dequeue(const MunitParameter [], void*);
+MunitResult q_str_test_front(const MunitParameter [], void*);
 
 MunitResult bst_int_test_new(const MunitParameter [], void*);
 MunitResult bst_int_test_free(const MunitParameter [], void*);

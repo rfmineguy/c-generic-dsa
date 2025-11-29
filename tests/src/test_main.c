@@ -21,12 +21,21 @@ MunitTest ht[] = {
 //   { NULL, NULL, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL }
 // };
 
-MunitTest q[] = {
-  { "/new",      q_test_new, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
-  { "/free",     q_test_free, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
-  { "/enqueue",  q_test_enqueue, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
-  { "/dequeue",  q_test_dequeue, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
-  { "/front",    q_test_front, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+MunitTest q_int[] = {
+  { "/new",      q_int_test_new, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/free",     q_int_test_free, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/enqueue",  q_int_test_enqueue, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/dequeue",  q_int_test_dequeue, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/front",    q_int_test_front, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { NULL, NULL, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL }
+};
+
+MunitTest q_str[] = {
+  { "/new",      q_str_test_new, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/free",     q_str_test_free, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/enqueue",  q_str_test_enqueue, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/dequeue",  q_str_test_dequeue, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/front",    q_str_test_front, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
   { NULL, NULL, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL }
 };
 
@@ -55,7 +64,8 @@ MunitTest bst_str[] = {
 MunitSuite all_suites[] = {
   { "/ht",      ht, NULL, 1, MUNIT_SUITE_OPTION_NONE },
   // { "/ll", ll, NULL, 1, MUNIT_SUITE_OPTION_NONE },
-  { "/q",       q,  NULL, 1, MUNIT_SUITE_OPTION_NONE },
+  { "/q_int",   q_int,  NULL, 1, MUNIT_SUITE_OPTION_NONE },
+  { "/q_str",   q_str,  NULL, 1, MUNIT_SUITE_OPTION_NONE },
   { "/bst_int", bst_int,  NULL, 1, MUNIT_SUITE_OPTION_NONE },
   { "/bst_str", bst_str,  NULL, 1, MUNIT_SUITE_OPTION_NONE },
   {NULL, NULL, NULL, 0, MUNIT_SUITE_OPTION_NONE},
