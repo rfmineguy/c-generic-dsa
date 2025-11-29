@@ -26,7 +26,7 @@ struct bst_node() {
 };
 
 typedef struct bst_iter() {
-  int iter_type;
+  int iter_type, end;
   q() q;
   bst_node() *node;
 } bst_iter();
