@@ -5,7 +5,7 @@
   munit_assert_string_equal((node)->val, val_)
 
 #define TEST_STRINGS_COUNT 30
-const char *strings[TEST_STRINGS_COUNT] = {
+const char *bst_strings[TEST_STRINGS_COUNT] = {
   "aj2kf",
   "z",
   "pQ9",
@@ -76,10 +76,10 @@ MunitResult bst_str_test_insert(const MunitParameter params[], void* fixture) {
 
 MunitResult bst_str_test_insert_duplicate(const MunitParameter params[], void* fixture) {
   bst_str bst = bst_str_new();
-  for (int i = 0; i < TEST_STRINGS_COUNT; i++) bst_str_insert(&bst, strings[i]);
+  for (int i = 0; i < TEST_STRINGS_COUNT; i++) bst_str_insert(&bst, bst_strings[i]);
 
   for (int i = 1; i < TEST_STRINGS_COUNT/2 + 1; i++) {
-    bst_str_insert(&bst, strings[0]);
+    bst_str_insert(&bst, bst_strings[0]);
     munit_assert_int(bst.root->count, ==, 1 + i);
   }
 
@@ -89,11 +89,11 @@ MunitResult bst_str_test_insert_duplicate(const MunitParameter params[], void* f
 
 MunitResult bst_str_test_delete(const MunitParameter params[], void* fixture) {
   bst_str bst = bst_str_new();
-  for (int i = 0; i < TEST_STRINGS_COUNT; i++) bst_str_insert(&bst, strings[i]);
+  for (int i = 0; i < TEST_STRINGS_COUNT; i++) bst_str_insert(&bst, bst_strings[i]);
 
-  munit_assert_not_null(bst_str_delete(&bst, strings[2]));
-  munit_assert_not_null(bst_str_delete(&bst, strings[0]));
-  munit_assert_not_null(bst_str_delete(&bst, strings[5]));
+  munit_assert_not_null(bst_str_delete(&bst, bst_strings[2]));
+  munit_assert_not_null(bst_str_delete(&bst, bst_strings[0]));
+  munit_assert_not_null(bst_str_delete(&bst, bst_strings[5]));
   munit_assert_null(bst_str_delete(&bst, "something not in the bst"));
 
   bst_str_free(&bst);
@@ -102,21 +102,21 @@ MunitResult bst_str_test_delete(const MunitParameter params[], void* fixture) {
 
 MunitResult bst_str_test_search(const MunitParameter params[], void* fixture) {
   bst_str bst = bst_str_new();
-  const char** i = bst_str_search(&bst, strings[0]);
+  const char** i = bst_str_search(&bst, bst_strings[0]);
   munit_assert_ptr_null(i);
   
-  bst_str_insert(&bst, strings[0]);
-  i = bst_str_search(&bst, strings[0]);
+  bst_str_insert(&bst, bst_strings[0]);
+  i = bst_str_search(&bst, bst_strings[0]);
   munit_assert_ptr_not_null(i);
 
   for (int i = 0; i < TEST_STRINGS_COUNT; i++) {
-    bst_str_insert(&bst, strings[i]);
+    bst_str_insert(&bst, bst_strings[i]);
   }
 
   for (int i = TEST_STRINGS_COUNT-1; i >= 0; i--) {
-    const char** b = bst_str_search(&bst, strings[i]);
+    const char** b = bst_str_search(&bst, bst_strings[i]);
     munit_assert_not_null(b);
-    munit_assert_string_equal(*b, strings[i]);
+    munit_assert_string_equal(*b, bst_strings[i]);
   }
 
   bst_str_free(&bst);
