@@ -124,13 +124,14 @@ bst() bstfunc(bst, new)() {
 }
 void  bstfunc(bst, free)(bst()* b) {
   bstfunc(bst, free_node)(&b->root);
+  b->root = 0;
 }
 
 void bstfunc(bst, insert)(bst()* b, bst_type_type v) {
   bstfunc(bst, insert_node)(&b->root, v);
 }
-void bstfunc(bst, delete)(bst()* b, bst_type_type v) {
-  bstfunc(bst, delete_node)(&b->root, v);
+struct bst_node()* bstfunc(bst, delete)(bst()* b, bst_type_type v) {
+  return bstfunc(bst, delete_node)(&b->root, v);
 }
 bst_type_type* bstfunc(bst, search)(bst()* b, bst_type_type v) {
   struct bst_node()* n = bstfunc(bst, search_node)(b->root, v);

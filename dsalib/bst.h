@@ -41,7 +41,7 @@ void  bstfunc(bst, free)(bst()* b);
 int        bstfunc(bst, cmp)(bst_type_type, bst_type_type);
 
 void       bstfunc(bst, insert)(bst()* b, bst_type_type);
-void       bstfunc(bst, delete)(bst()* b, bst_type_type);
+bst_node()*bstfunc(bst, delete)(bst()* b, bst_type_type);
 bst_type_type* bstfunc(bst, search)(bst()* b, bst_type_type);
 
 void       bstfunc(bst, print_val)(bst_type_type);
