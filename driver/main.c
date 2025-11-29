@@ -10,8 +10,8 @@ void bst_int_driver();
 void bst_str_driver();
 
 int main() {
-  ht_str_int_driver();
-  q_int_driver();
-  bst_int_driver();
+  // ht_str_int_driver();
+  // q_int_driver();
+  // bst_int_driver();
   bst_str_driver();
 }
