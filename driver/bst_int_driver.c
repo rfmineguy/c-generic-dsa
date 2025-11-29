@@ -1,6 +1,22 @@
 #include "../dsaimpls/bst_int.h"
+#include <stdio.h>
 
-void bst_int_driver() {
+void bst_int_driver_iterator() {
+#define INSERT_ORDER_COUNT 10
+  int insert_order[INSERT_ORDER_COUNT] = {50, 10, 30, 40, 15, 20, 21, 5, 8, 4};
+  bst_int bst = bst_int_new();
+  for (int i = 0; i < INSERT_ORDER_COUNT; i++) {
+    bst_int_insert(&bst, insert_order[i]);
+  }
+
+  printf("Iterator\n");
+  for (bst_int_iter it = bst_int_begin(&bst, BFS); !bst_int_end(&bst, it); it = bst_int_next(&bst, it)) {
+    printf("%d, ", it.node->val);
+  }
+  printf("\nIterator\n");
+}
+
+void bst_int_driver_no_iterator() {
   bst_int bst = bst_int_new();
   bst_int_insert(&bst, 11);
   bst_int_insert(&bst, 20);

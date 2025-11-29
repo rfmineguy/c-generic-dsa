@@ -3,39 +3,55 @@
 
 #define TEST_STRINGS_COUNT 30
 const char *strings[TEST_STRINGS_COUNT] = {
-  "aj2kf",
-  "z",
-  "pQ9",
-  "mve01t",
-  "a42ja",
-  "R8wZb0",
-  "qur",
-  "0x4b",
-  "hJtP2",
-  "F",
-  "t9cLQe",
-  "ox",
-  "W3v7",
-  "g4",
-  "Ypks2M",
-  "29",
-  "bdXqtrN",
-  "E0j",
-  "UuVr",
-  "H0",
-  "aB9nQ",
-  "m",
-  "C2xH7pFd",
-  "kXx",
-  "s4D1",
-  "Jv0R",
-  "P",
-  "Tt9wx",
-  "fZ",
-  "n3hKpQ0"
+    "apple",
+    "lantern",
+    "river",
+    "compass",
+    "velvet",
+    "horizon",
+    "timber",
+    "quartz",
+    "meadow",
+    "falcon",
+    "ember",
+    "summit",
+    "orchid",
+    "pinecone",
+    "drift",
+    "canyon",
+    "mosaic",
+    "harbor",
+    "willow",
+    "thicket",
+    "cobalt",
+    "sparrow",
+    "granite",
+    "cascade",
+    "pollen",
+    "ironwood",
+    "tempest",
+    "briar",
+    "forest",
+    "marble"
 };
 
-void bst_str_driver() {
+
+void bst_str_driver_iterator() {
+  bst_str bst = bst_str_new();
+  for (int i = 0; i < TEST_STRINGS_COUNT; i++) {
+    bst_str_insert(&bst, strings[i]);
+  }
+
+
+  printf("Iterator\n");
+  for (bst_str_iter it = bst_str_begin(&bst, BFS); !bst_str_end(&bst, it); it = bst_str_next(&bst, it)) {
+    printf("'%s', ", it.node->val);
+  }
+  printf("\nIterator\n");
+
+}
+
+void bst_str_driver_no_iterator() {
   bst_str bst = bst_str_new();
   bst_str_insert(&bst, "5");
   bst_str_insert(&bst, "20");
