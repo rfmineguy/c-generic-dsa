@@ -1,5 +1,15 @@
+#define bst_type_name int
+#define bst_type_type int
+
 #include <stdio.h>
-#include "bst_int.h"
+typedef struct bst_int_node bst_int_node;
+
+#define q_type_type bst_int_node*
+#define q_type_name bst_int_node
+#define Q_ALLOW_DIRECT_INCLUDE
+#include "../dsalib/queue.c"
+#include "../dsalib/bst.h"
+
 int bst_int_cmp(int a, int b) {
   if (a < b) return -1;
   if (a > b) return 1;
