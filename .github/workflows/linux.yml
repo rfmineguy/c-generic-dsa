@@ -19,7 +19,7 @@ jobs:
 
       - name: Compile Tests
         run: |
-          make out/tests
+          make out/test
         shell: bash
 
       - name: Run Tests
