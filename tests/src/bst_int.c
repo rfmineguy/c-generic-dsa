@@ -133,3 +133,21 @@ MunitResult bst_int_test_search(const MunitParameter params[], void* fixture) {
   bst_int_free(&bst);
   return MUNIT_OK;
 }
+
+MunitResult bst_int_test_bfs_iter(const MunitParameter params[], void* fixture) {
+#define INSERT_ORDER_COUNT 10
+  int insert_order[INSERT_ORDER_COUNT] = {50, 10, 30, 40, 15, 20, 21, 5, 8, 4};
+  bst_int bst = bst_int_new();
+  for (int i = 0; i < INSERT_ORDER_COUNT; i++) {
+    bst_int_insert(&bst, insert_order[i]);
+  }
+
+  int expected_bst_order[INSERT_ORDER_COUNT] = {50, 10, 5, 30, 4, 8, 15, 40, 20, 21};
+
+  int i = 0;
+  for (bst_int_iter it = bst_int_begin(&bst, BFS); !bst_int_end(&bst, it); it = bst_int_next(&bst, it)) {
+    munit_assert_int(expected_bst_order[i++], ==, it.node->val);
+  }
+
+  return MUNIT_OK;
+}

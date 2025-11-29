@@ -6,36 +6,36 @@
 
 #define TEST_STRINGS_COUNT 30
 const char *bst_strings[TEST_STRINGS_COUNT] = {
-  "aj2kf",
-  "z",
-  "pQ9",
-  "mve01t",
-  "a42ja",
-  "R8wZb0",
-  "qur",
-  "0x4b",
-  "hJtP2",
-  "F",
-  "t9cLQe",
-  "ox",
-  "W3v7",
-  "g4",
-  "Ypks2M",
-  "29",
-  "bdXqtrN",
-  "E0j",
-  "UuVr",
-  "H0",
-  "aB9nQ",
-  "m",
-  "C2xH7pFd",
-  "kXx",
-  "s4D1",
-  "Jv0R",
-  "P",
-  "Tt9wx",
-  "fZ",
-  "n3hKpQ0"
+    "apple",
+    "lantern",
+    "river",
+    "compass",
+    "velvet",
+    "horizon",
+    "timber",
+    "quartz",
+    "meadow",
+    "falcon",
+    "ember",
+    "summit",
+    "orchid",
+    "pinecone",
+    "drift",
+    "canyon",
+    "mosaic",
+    "harbor",
+    "willow",
+    "thicket",
+    "cobalt",
+    "sparrow",
+    "granite",
+    "cascade",
+    "pollen",
+    "ironwood",
+    "tempest",
+    "briar",
+    "forest",
+    "marble"
 };
 
 MunitResult bst_str_test_new(const MunitParameter params[], void* fixture) {
@@ -120,5 +120,23 @@ MunitResult bst_str_test_search(const MunitParameter params[], void* fixture) {
   }
 
   bst_str_free(&bst);
+  return MUNIT_OK;
+}
+
+MunitResult bst_str_test_bfs_iter(const MunitParameter params[], void* fixture) {
+  bst_str bst = bst_str_new();
+  for (int i = 0; i < TEST_STRINGS_COUNT; i++) {
+    bst_str_insert(&bst, bst_strings[i]);
+  }
+
+  const char* expected_bst_order[TEST_STRINGS_COUNT] = {
+  "apple", "lantern", "compass", "river", "canyon", "horizon", "quartz", "velvet", "briar", "cobalt", "falcon", "ironwood", "meadow", "timber", "willow", "cascade", "ember", "harbor", "marble", "orchid", "summit", "drift", "granite", "mosaic", "pinecone", "sparrow", "thicket", "forest", "pollen", "tempest",
+  };
+
+  int i = 0;
+  for (bst_str_iter it = bst_str_begin(&bst, BFS); !bst_str_end(&bst, it); it = bst_str_next(&bst, it)) {
+    munit_assert_string_equal(expected_bst_order[i++], it.node->val);
+  }
+
   return MUNIT_OK;
 }

@@ -48,6 +48,7 @@ MunitTest bst_int[] = {
   { "/ins_dec_inord", bst_int_test_insert_inorder_dec, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
   { "/del",         bst_int_test_delete, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
   { "/search",      bst_int_test_search, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/bfs_iter",    bst_int_test_bfs_iter, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
   { NULL, NULL, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL }
 };
 
@@ -58,6 +59,7 @@ MunitTest bst_str[] = {
   { "/ins_dup",     bst_str_test_insert_duplicate, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
   { "/del",         bst_str_test_delete, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
   { "/search",      bst_str_test_search, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/bfs_iter",    bst_str_test_bfs_iter, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
   { NULL, NULL, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL }
 };
 
