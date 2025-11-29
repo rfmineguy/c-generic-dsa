@@ -30,10 +30,34 @@ MunitTest q[] = {
   { NULL, NULL, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL }
 };
 
+MunitTest bst_int[] = {
+  { "/new",         bst_int_test_new, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/free",        bst_int_test_free, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/ins",         bst_int_test_insert, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/ins_dup",     bst_int_test_insert_duplicate, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/ins_inc_inord", bst_int_test_insert_inorder_inc, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/ins_dec_inord", bst_int_test_insert_inorder_dec, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/del",         bst_int_test_delete, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/search",      bst_int_test_search, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { NULL, NULL, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL }
+};
+
+MunitTest bst_str[] = {
+  { "/new",         bst_str_test_new, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/free",        bst_str_test_free, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/ins",         bst_str_test_insert, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/ins_dup",     bst_str_test_insert_duplicate, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/del",         bst_str_test_delete, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/search",      bst_str_test_search, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { NULL, NULL, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL }
+};
+
 MunitSuite all_suites[] = {
-  { "/ht", ht, NULL, 1, MUNIT_SUITE_OPTION_NONE },
+  { "/ht",      ht, NULL, 1, MUNIT_SUITE_OPTION_NONE },
   // { "/ll", ll, NULL, 1, MUNIT_SUITE_OPTION_NONE },
-  { "/q",  q,  NULL, 1, MUNIT_SUITE_OPTION_NONE },
+  { "/q",       q,  NULL, 1, MUNIT_SUITE_OPTION_NONE },
+  { "/bst_int", bst_int,  NULL, 1, MUNIT_SUITE_OPTION_NONE },
+  { "/bst_str", bst_str,  NULL, 1, MUNIT_SUITE_OPTION_NONE },
   {NULL, NULL, NULL, 0, MUNIT_SUITE_OPTION_NONE},
 };
 

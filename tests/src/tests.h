@@ -23,4 +23,19 @@ MunitResult q_test_enqueue(const MunitParameter [], void*);
 MunitResult q_test_dequeue(const MunitParameter [], void*);
 MunitResult q_test_front(const MunitParameter [], void*);
 
+MunitResult bst_int_test_new(const MunitParameter [], void*);
+MunitResult bst_int_test_free(const MunitParameter [], void*);
+MunitResult bst_int_test_insert(const MunitParameter [], void*);
+MunitResult bst_int_test_insert_duplicate(const MunitParameter [], void*);
+MunitResult bst_int_test_insert_inorder_inc(const MunitParameter [], void*);
+MunitResult bst_int_test_insert_inorder_dec(const MunitParameter [], void*);
+MunitResult bst_int_test_delete(const MunitParameter [], void*);
+MunitResult bst_int_test_search(const MunitParameter [], void*);
+
+MunitResult bst_str_test_new(const MunitParameter [], void*);
+MunitResult bst_str_test_free(const MunitParameter [], void*);
+MunitResult bst_str_test_insert(const MunitParameter [], void*);
+MunitResult bst_str_test_insert_duplicate(const MunitParameter [], void*);
+MunitResult bst_str_test_delete(const MunitParameter [], void*);
+MunitResult bst_str_test_search(const MunitParameter [], void*);
 #endif
