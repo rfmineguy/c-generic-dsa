@@ -144,3 +144,58 @@ void bstfunc(bst, print)(bst()* b) {
   if (b->root)  bstfunc(bst, print_node)(b->root, 0, 1);
   printf("------------\n");
 }
+
+static bst_iter() bstfunc(bst, next_bfs)(bst()* b, bst_iter() it) {
+  if (qfunc(q, empty)(&it.q)) {
+    return (bst_iter()) {.q = it.q, .node = 0, .end = 1};
+  }
+  it.node = qfunc(q, dequeue)(&it.q)->val;
+  if (it.node->left)  qfunc(q, enqueue)(&it.q, it.node->left);
+  if (it.node->right) qfunc(q, enqueue)(&it.q, it.node->right);
+  return it;
+}
+
+static bst_iter() bstfunc(bst, next_dfs_inorder)(bst()* b, bst_iter() it) {
+  return (bst_iter()){};
+}
+
+static bst_iter() bstfunc(bst, next_dfs_preorder)(bst()* b, bst_iter() it) {
+  return (bst_iter()){};
+}
+
+static bst_iter() bstfunc(bst, next_dfs_postorder)(bst()* b, bst_iter() it) {
+  return (bst_iter()){};
+}
+
+bst_iter() bstfunc(bst, begin)(bst()* b, int itertype) {
+  bst_iter() it = {};
+  it.iter_type = itertype;
+  it.end = 0;
+  switch (it.iter_type) {
+    case 0: {
+      it.q = qfunc(q, new)();
+      it.node = b->root;
+      if (b->root) {
+        if (b->root->left) qfunc(q, enqueue)(&it.q, b->root->left);
+        if (b->root->right) qfunc(q, enqueue)(&it.q, b->root->right);
+      }
+      break;
+    }
+    default: assert(0 && "Not implmented");
+  }
+  return it;
+}
+
+int bstfunc(bst, end)(bst()* b, bst_iter() it) {
+  return it.end;
+}
+
+bst_iter() bstfunc(bst, next)(bst()* b, bst_iter() it) {
+  switch (it.iter_type) {
+    case 0: return bstfunc(bst, next_bfs)(b, it); break;
+    case 1: return bstfunc(bst, next_dfs_inorder)(b, it); break;
+    case 2: return bstfunc(bst, next_dfs_preorder)(b, it); break;
+    case 3: return bstfunc(bst, next_dfs_postorder)(b, it); break;
+    default: assert(0 && "Not implmented");
+  }
+}
