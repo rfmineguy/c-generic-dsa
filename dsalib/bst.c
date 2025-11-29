@@ -167,9 +167,9 @@ static bst_iter() bstfunc(bst, next_dfs_postorder)(bst()* b, bst_iter() it) {
   return (bst_iter()){};
 }
 
-bst_iter() bstfunc(bst, begin)(bst()* b, int itertype) {
+bst_iter() bstfunc(bst, begin)(bst()* b, itertype iter_type) {
   bst_iter() it = {};
-  it.iter_type = itertype;
+  it.iter_type = iter_type;
   it.end = 0;
   switch (it.iter_type) {
     case 0: {
@@ -192,10 +192,10 @@ int bstfunc(bst, end)(bst()* b, bst_iter() it) {
 
 bst_iter() bstfunc(bst, next)(bst()* b, bst_iter() it) {
   switch (it.iter_type) {
-    case 0: return bstfunc(bst, next_bfs)(b, it); break;
-    case 1: return bstfunc(bst, next_dfs_inorder)(b, it); break;
-    case 2: return bstfunc(bst, next_dfs_preorder)(b, it); break;
-    case 3: return bstfunc(bst, next_dfs_postorder)(b, it); break;
+    case BFS:          return bstfunc(bst, next_bfs)(b, it); break;
+    case DFS_INORDER:  return bstfunc(bst, next_dfs_inorder)(b, it); break;
+    case DFS_PREORDER: return bstfunc(bst, next_dfs_preorder)(b, it); break;
+    case DFS_POSTORDER: return bstfunc(bst, next_dfs_postorder)(b, it); break;
     default: assert(0 && "Not implmented");
   }
 }

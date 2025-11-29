@@ -19,6 +19,13 @@
 #define bstfunc(namespace, name)\
   func_expand3(namespace, bst_type_name, name)
 
+typedef enum {
+  BFS,
+  DFS_INORDER,
+  DFS_PREORDER,
+  DFS_POSTORDER,
+} itertype;
+
 struct bst_node() {
   bst_type_type val;
   int count;
@@ -26,7 +33,8 @@ struct bst_node() {
 };
 
 typedef struct bst_iter() {
-  int iter_type, end;
+  itertype iter_type;
+  int end;
   q() q;
   bst_node() *node;
 } bst_iter();
@@ -47,7 +55,7 @@ bst_type_type* bstfunc(bst, search)(bst()* b, bst_type_type);
 void       bstfunc(bst, print_val)(bst_type_type);
 void       bstfunc(bst, print)(bst()* b);
 
-bst_iter() bstfunc(bst, begin)(bst()* b, int iter_type);
+bst_iter() bstfunc(bst, begin)(bst()* b, itertype iter_type);
 int        bstfunc(bst, end)(bst()* b, bst_iter() it);
 bst_iter() bstfunc(bst, next)(bst()* b, bst_iter() it);
 
