@@ -24,4 +24,4 @@ jobs:
 
       - name: Run Tests
         run: |
-          ./out/tests
+          ./out/test
