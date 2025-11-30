@@ -15,3 +15,20 @@ void stackfunc(stack, free)(stack()* stack) {
     free(t);
   }
 }
+
+struct stack_node()* stackfunc(stack, push)(stack()* stack, stack_type_type val) {
+  struct stack_node()* n = calloc(1, sizeof(struct stack_node()));
+  if (!n) return n;
+  n->val = val;
+  n->next = 0;
+
+  if (!stack->head)
+    stack->head = n;
+  else {
+    struct stack_node()* oldhead = stack->head;
+    stack->head = n;
+    stack->head->next = oldhead;
+  }
+
+  return n;
+}
