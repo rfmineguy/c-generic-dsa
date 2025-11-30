@@ -63,6 +63,16 @@ MunitTest bst_str[] = {
   { NULL, NULL, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL }
 };
 
+MunitTest stack_int[] = {
+  { "/new",         stack_int_test_new, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/free",        stack_int_test_free, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/push",        stack_int_test_push, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/pop",         stack_int_test_pop, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/top",         stack_int_test_top, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/empty",       stack_int_test_empty, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { NULL, NULL, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL }
+};
+
 MunitSuite all_suites[] = {
   { "/ht",      ht, NULL, 1, MUNIT_SUITE_OPTION_NONE },
   // { "/ll", ll, NULL, 1, MUNIT_SUITE_OPTION_NONE },
@@ -70,6 +80,7 @@ MunitSuite all_suites[] = {
   { "/q_str",   q_str,  NULL, 1, MUNIT_SUITE_OPTION_NONE },
   { "/bst_int", bst_int,  NULL, 1, MUNIT_SUITE_OPTION_NONE },
   { "/bst_str", bst_str,  NULL, 1, MUNIT_SUITE_OPTION_NONE },
+  { "/stack_int", stack_int,  NULL, 1, MUNIT_SUITE_OPTION_NONE },
   {NULL, NULL, NULL, 0, MUNIT_SUITE_OPTION_NONE},
 };
 

@@ -47,4 +47,11 @@ MunitResult bst_str_test_delete(const MunitParameter [], void*);
 MunitResult bst_str_test_search(const MunitParameter [], void*);
 MunitResult bst_str_test_bfs_iter(const MunitParameter [], void*);
 
+MunitResult stack_int_test_new(const MunitParameter [], void*);
+MunitResult stack_int_test_free(const MunitParameter [], void*);
+MunitResult stack_int_test_push(const MunitParameter [], void*);
+MunitResult stack_int_test_pop(const MunitParameter [], void*);
+MunitResult stack_int_test_top(const MunitParameter [], void*);
+MunitResult stack_int_test_empty(const MunitParameter [], void*);
+
 #endif
