@@ -173,11 +173,15 @@ bst_iter() bstfunc(bst, begin)(bst()* b, itertype iter_type) {
   it.end = 0;
   switch (it.iter_type) {
     case 0: {
+      qfunc(q, free)(&it.q);
       it.q = qfunc(q, new)();
       it.node = b->root;
       if (b->root) {
         if (b->root->left) qfunc(q, enqueue)(&it.q, b->root->left);
         if (b->root->right) qfunc(q, enqueue)(&it.q, b->root->right);
+      }
+      else {
+        it.end = 1;
       }
       break;
     }
