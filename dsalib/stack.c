@@ -45,3 +45,13 @@ stack_type_type* stackfunc(stack, top)(const stack()* stack) {
   if (!stack->head) return 0;
   return &stack->head->val;
 }
+
+void stackfunc(stack, print)(const stack()* stack) {
+  struct stack_node()* n = stack->head;
+  while (n) {
+    stackfunc(stack, print_val)(n->val);
+    if (n->next) printf(" -> ");
+    n = n->next;
+  }
+  printf("\n");
+}
