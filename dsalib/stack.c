@@ -40,3 +40,8 @@ struct stack_node()* stackfunc(stack, pop)(stack()* stack) {
   stack->head = stack->head->next;
   return n;
 }
+
+stack_type_type* stackfunc(stack, top)(const stack()* stack) {
+  if (!stack->head) return 0;
+  return &stack->head->val;
+}
