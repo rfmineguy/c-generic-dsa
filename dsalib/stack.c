@@ -14,6 +14,7 @@ void stackfunc(stack, free)(stack()* stack) {
     n = n->next;
     free(t);
   }
+  stack->head = 0;
 }
 
 struct stack_node()* stackfunc(stack, push)(stack()* stack, stack_type_type val) {
