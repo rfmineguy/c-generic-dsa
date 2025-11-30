@@ -32,3 +32,11 @@ struct stack_node()* stackfunc(stack, push)(stack()* stack, stack_type_type val)
 
   return n;
 }
+
+struct stack_node()* stackfunc(stack, pop)(stack()* stack) {
+  if (!stack->head) return 0;
+
+  struct stack_node()* n = stack->head;
+  stack->head = stack->head->next;
+  return n;
+}
