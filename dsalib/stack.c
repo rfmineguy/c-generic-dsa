@@ -47,6 +47,10 @@ stack_type_type* stackfunc(stack, top)(const stack()* stack) {
   return &stack->head->val;
 }
 
+bool stackfunc(stack, empty)(const stack()* stack) {
+  return stack->head == 0;
+}
+
 void stackfunc(stack, print)(const stack()* stack) {
   struct stack_node()* n = stack->head;
   while (n) {
