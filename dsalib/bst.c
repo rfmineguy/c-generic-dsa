@@ -145,6 +145,21 @@ void bstfunc(bst, print)(bst()* b) {
   printf("------------\n");
 }
 
+void bstfunc(bst, print_dot)(bst()* b) {
+  printf("digraph {\n");
+  for (bst_iter() it = bstfunc(bst, begin)(b, BFS); !bstfunc(bst, end)(b, it); it = bstfunc(bst, next)(b, it)) {
+    bstfunc(bst, print_val)(it.node->val);
+    printf(" -> {");
+    if (it.node->left)  bstfunc(bst, print_val)(it.node->left->val);
+    if (it.node->right) {
+      printf(", ");
+      bstfunc(bst, print_val)(it.node->right->val);
+    }
+    printf(" }\n");
+  }
+  printf("}\n");
+}
+
 static bst_iter() bstfunc(bst, next_bfs)(bst()* b, bst_iter() it) {
   if (qfunc(q, empty)(&it.q)) {
     return (bst_iter()) {.q = it.q, .node = 0, .end = 1};

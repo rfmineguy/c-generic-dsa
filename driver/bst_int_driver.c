@@ -28,6 +28,7 @@ void bst_int_driver_no_iterator() {
   bst_int_insert(&bst, 11);
   bst_int_insert(&bst, 16);
   bst_int_print(&bst);
+  bst_int_print_dot(&bst);
 
   bst_int_delete(&bst, 16);
   bst_int_delete(&bst, 14);
@@ -45,6 +46,12 @@ void bst_int_driver_no_iterator() {
   bst_int_delete(&bst, 20);
   bst_int_print(&bst);
 
-  bst_int_delete(&bst, 2);
+  // bst_int_delete(&bst, 2);
   bst_int_print(&bst);
+
+  // for (bst_int_iter it = bst_int_begin(&bst, BFS); !bst_int_end(&bst, it); it = bst_int_next(&bst, it)) {
+  //   bst_int_print_val(it.node->val);
+  //   printf(" -> ");
+  // }
+  bst_int_print_dot(&bst);
 }

@@ -54,6 +54,7 @@ bst_type_type* bstfunc(bst, search)(bst()* b, bst_type_type);
 
 void       bstfunc(bst, print_val)(bst_type_type);
 void       bstfunc(bst, print)(bst()* b);
+void       bstfunc(bst, print_dot)(bst()* b);
 
 bst_iter() bstfunc(bst, begin)(bst()* b, itertype iter_type);
 int        bstfunc(bst, end)(bst()* b, bst_iter() it);
