@@ -54,7 +54,7 @@ bool stackfunc(stack, empty)(const stack()* stack) {
 void stackfunc(stack, print)(const stack()* stack) {
   struct stack_node()* n = stack->head;
   while (n) {
-    stackfunc(stack, print_val)(n->val);
+    stackfunc(stack, print_node_val)(n->val);
     if (n->next) printf(" -> ");
     n = n->next;
   }

@@ -28,6 +28,8 @@ typedef struct stack() {
   struct stack_node() *head;
 } stack();
 
+void                 stackfunc(stack, print_node_val)(stack_type_type);
+
 stack()              stackfunc(stack, new)();
 void                 stackfunc(stack, free)(stack()*);
 
