@@ -190,7 +190,16 @@ static bst_iter() bstfunc(bst, next_dfs_inorder)(bst()* b, bst_iter() it) {
 }
 
 static bst_iter() bstfunc(bst, next_dfs_preorder)(bst()* b, bst_iter() it) {
-  return (bst_iter()){};
+  if (!stackfunc(stack, top)(&it.dsa.stack)) 
+    return (bst_iter()) {.dsa.stack = it.dsa.stack, .node = 0, .end = 1, .iter_type = it.iter_type};
+
+  bst_node()* n = stackfunc(stack, pop)(&it.dsa.stack)->val;
+  it.node = n;
+
+  if (n->right) stackfunc(stack, push)(&it.dsa.stack, n->right);
+  if (n->left) stackfunc(stack, push)(&it.dsa.stack, n->left);
+
+  return it;
 }
 
 static bst_iter() bstfunc(bst, next_dfs_postorder)(bst()* b, bst_iter() it) {
@@ -227,10 +236,13 @@ bst_iter() bstfunc(bst, begin)(bst()* b, itertype iter_type) {
       if (!it.node) it.end = 1;
       break;
     }
+    case DFS_PREORDER: {
+      stackfunc(stack, free)(&it.dsa.stack);
+      it.dsa.stack = stackfunc(stack, new)();
       it.node = b->root;
       if (b->root) {
-        if (b->root->left) qfunc(q, enqueue)(&it.q, b->root->left);
-        if (b->root->right) qfunc(q, enqueue)(&it.q, b->root->right);
+        if (b->root->left) stackfunc(stack, push)(&it.dsa.stack, b->root->left);
+        if (b->root->right) stackfunc(stack, push)(&it.dsa.stack, b->root->right);
       }
       else {
         it.end = 1;
