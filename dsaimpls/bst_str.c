@@ -5,6 +5,10 @@
 #include <string.h>
 typedef struct bst_str_node bst_str_node;
 
+#define stack_type_type bst_str_node*
+#define stack_type_name bst_str_node
+#include "../dsalib/stack.c"
+
 #define q_type_type bst_str_node*
 #define q_type_name bst_str_node
 #define Q_ALLOW_DIRECT_INCLUDE
@@ -20,5 +24,10 @@ void bst_str_print_val(const char* val) {
   printf("%s", val);
 }
 
-void q_bst_str_node_print_node_val(bst_str_node* val) {}
+void q_bst_str_node_print_node_val(bst_str_node* val) {
+  bst_str_print_val(val->val);
+}
+void stack_bst_str_node_print_node_val(bst_str_node* val) {
+  bst_str_print_val(val->val);
+}
 #include "../dsalib/bst.c"
