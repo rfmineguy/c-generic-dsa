@@ -35,8 +35,11 @@ struct bst_node() {
 typedef struct bst_iter() {
   itertype iter_type;
   int end;
-  q() q;
-  bst_node() *node;
+  union {
+    q() q;
+    stack() stack;
+  } dsa;
+  bst_node() *node, *last_visit;
 } bst_iter();
 
 typedef struct bst() {
