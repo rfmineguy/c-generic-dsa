@@ -161,12 +161,12 @@ void bstfunc(bst, print_dot)(bst()* b) {
 }
 
 static bst_iter() bstfunc(bst, next_bfs)(bst()* b, bst_iter() it) {
-  if (qfunc(q, empty)(&it.q)) {
-    return (bst_iter()) {.q = it.q, .node = 0, .end = 1};
+  if (qfunc(q, empty)(&it.dsa.q)) {
+    return (bst_iter()) {.dsa.q = it.dsa.q, .node = 0, .end = 1, .iter_type = it.iter_type};
   }
-  it.node = qfunc(q, dequeue)(&it.q)->val;
-  if (it.node->left)  qfunc(q, enqueue)(&it.q, it.node->left);
-  if (it.node->right) qfunc(q, enqueue)(&it.q, it.node->right);
+  it.node = qfunc(q, dequeue)(&it.dsa.q)->val;
+  if (it.node->left)  qfunc(q, enqueue)(&it.dsa.q, it.node->left);
+  if (it.node->right) qfunc(q, enqueue)(&it.dsa.q, it.node->right);
   return it;
 }
 
@@ -187,9 +187,19 @@ bst_iter() bstfunc(bst, begin)(bst()* b, itertype iter_type) {
   it.iter_type = iter_type;
   it.end = 0;
   switch (it.iter_type) {
-    case 0: {
-      qfunc(q, free)(&it.q);
-      it.q = qfunc(q, new)();
+    case BFS: {
+      qfunc(q, free)(&it.dsa.q);
+      it.dsa.q = qfunc(q, new)();
+      it.node = b->root;
+      if (b->root) {
+        if (b->root->left) qfunc(q, enqueue)(&it.dsa.q, b->root->left);
+        if (b->root->right) qfunc(q, enqueue)(&it.dsa.q, b->root->right);
+      }
+      else {
+        it.end = 1;
+      }
+      break;
+    }
       it.node = b->root;
       if (b->root) {
         if (b->root->left) qfunc(q, enqueue)(&it.q, b->root->left);
