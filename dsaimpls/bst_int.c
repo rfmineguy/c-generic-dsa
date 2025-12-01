@@ -4,10 +4,16 @@
 #include <stdio.h>
 typedef struct bst_int_node bst_int_node;
 
+
+#define stack_type_type bst_int_node*
+#define stack_type_name bst_int_node
+#include "../dsalib/stack.c"
+
 #define q_type_type bst_int_node*
 #define q_type_name bst_int_node
 #define Q_ALLOW_DIRECT_INCLUDE
 #include "../dsalib/queue.c"
+
 #include "../dsalib/bst.h"
 
 int bst_int_cmp(int a, int b) {
@@ -21,6 +27,10 @@ void bst_int_print_val(int val) {
 }
 
 void q_bst_int_node_print_node_val(bst_int_node* val) {
+  bst_int_print_val(val->val);
+}
+
+void stack_bst_int_node_print_node_val(bst_int_node* val) {
   bst_int_print_val(val->val);
 }
 
