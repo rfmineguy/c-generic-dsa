@@ -9,11 +9,25 @@ void bst_int_driver_iterator() {
     bst_int_insert(&bst, insert_order[i]);
   }
 
-  printf("Iterator\n");
+  printf("BFS Iterator\n");
   for (bst_int_iter it = bst_int_begin(&bst, BFS); !bst_int_end(&bst, it); it = bst_int_next(&bst, it)) {
     printf("%d, ", it.node->val);
   }
-  printf("\nIterator\n");
+  printf("\nBFS Iterator\n");
+
+  printf("DFS Inorder Iterator\n");
+  for (bst_int_iter it = bst_int_begin(&bst, DFS_INORDER); !bst_int_end(&bst, it); it = bst_int_next(&bst, it)) {
+    printf("%d, ", it.node->val);
+  }
+  printf("\nDFS Inorder Iterator\n");
+
+  printf("DFS Preorder Iterator\n");
+  for (bst_int_iter it = bst_int_begin(&bst, DFS_PREORDER); !bst_int_end(&bst, it); it = bst_int_next(&bst, it)) {
+    printf("%d, ", it.node->val);
+  }
+  printf("\nDFS Preorder Iterator\n");
+
+  bst_int_print_dot(&bst);
 }
 
 void bst_int_driver_no_iterator() {
