@@ -17,8 +17,8 @@ void da_int_driver() {
   da_int_insert_at(&da, 0, 4);
   da_int_insert_at(&da, 3, 24);
   da_int_print(&da, stdout);
-  da_int_delete_at(&da, 3);
-  da_int_delete_at(&da, 0);
+  da_int_delete_at(&da, 3, NULL);
+  da_int_delete_at(&da, 0, NULL);
   da_int_print(&da, stdout);
 
   int* x;

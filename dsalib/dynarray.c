@@ -30,7 +30,7 @@ bool dafunc(append)(da()* da, da_type_type v) {
 
 bool dafunc(insert_at)(da()* da, int index, da_type_type v) {
   if (index < 0 || index > da->size) return false;
-  if (da->size + 1 > da->capacity) {
+  if (da->size + 1 >= da->capacity) {
     if (!dafunc(grow)(da)) return false;
   }
   da->size++;
