@@ -5,7 +5,7 @@ OUT ?= out
 TESTS_OUTDIR := $(OUT)
 
 TESTS_SOURCES := $(THIS_DIR)/src/ht.c\
-								 $(THIS_DIR)/src/ll.c\
+								 $(THIS_DIR)/src/ll_int.c\
 								 $(THIS_DIR)/src/queue_int.c\
 								 $(THIS_DIR)/src/queue_str.c\
 								 $(THIS_DIR)/src/bst_int.c\

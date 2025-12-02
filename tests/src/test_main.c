@@ -9,17 +9,17 @@ MunitTest ht[] = {
   { NULL, NULL, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL }
 };
 
-// MunitTest ll[] = {
-//   { "/new",      ll_test_new, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
-//   { "/free",     ll_test_free, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
-//   { "/pushback", ll_test_pushback, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
-//   { "/pushfront",ll_test_pushfront, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
-//   { "/popback",  ll_test_popback, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
-//   { "/popfront", ll_test_popfront, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
-//   { "/search",   ll_test_search, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
-//   { "/empty",    ll_test_empty, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
-//   { NULL, NULL, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL }
-// };
+MunitTest ll_int[] = {
+  { "/new",      ll_int_test_new, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/free",     ll_int_test_free, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/pushback", ll_int_test_pushback, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/pushfront",ll_int_test_pushfront, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/popback",  ll_int_test_popback, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/popfront", ll_int_test_popfront, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/search",   ll_int_test_search, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/empty",    ll_int_test_empty, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { NULL, NULL, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL }
+};
 
 MunitTest q_int[] = {
   { "/new",      q_int_test_new, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
@@ -75,7 +75,7 @@ MunitTest stack_int[] = {
 
 MunitSuite all_suites[] = {
   { "/ht",      ht, NULL, 1, MUNIT_SUITE_OPTION_NONE },
-  // { "/ll", ll, NULL, 1, MUNIT_SUITE_OPTION_NONE },
+  { "/ll_int",  ll_int, NULL, 1, MUNIT_SUITE_OPTION_NONE },
   { "/q_int",   q_int,  NULL, 1, MUNIT_SUITE_OPTION_NONE },
   { "/q_str",   q_str,  NULL, 1, MUNIT_SUITE_OPTION_NONE },
   { "/bst_int", bst_int,  NULL, 1, MUNIT_SUITE_OPTION_NONE },
