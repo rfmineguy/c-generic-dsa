@@ -40,3 +40,13 @@ bool dafunc(insert_at)(da()* da, int index, da_type_type v) {
   da->buffer[index] = v;
   return true;
 }
+
+bool dafunc(delete_at)(da()* da, int index, da_type_type* out_removed) {
+  if (index < 0 || index >= da->size) return false;
+  if (out_removed) *out_removed = da->buffer[index];
+  for (int i = index; i < da->size - 1; i++) {
+    da->buffer[i] = da->buffer[i + 1];
+  }
+  da->size--;
+  return true;
+}
