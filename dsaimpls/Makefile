@@ -11,6 +11,7 @@ DSA_IMPL_LIB_SOURCES := $(THIS_DIR)/queue_int.c\
                         $(THIS_DIR)/bst_int.c\
                         $(THIS_DIR)/bst_str.c\
                         $(THIS_DIR)/stack_int.c\
+                        $(THIS_DIR)/ll_int.c\
 
 DSA_IMPL_LIB_OBJECTS := $(patsubst $(THIS_DIR)/%.c, $(DSA_IMPL_LIB_OUTDIR)/%.c.o, $(DSA_IMPL_LIB_SOURCES))
 
