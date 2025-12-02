@@ -16,8 +16,8 @@
 #error "Must define ll_type_type macro"
 #endif
 
-#define llfunc(namespace, name)\
-  func_expand3(namespace, ll_type_name, name)
+#define llfunc(name)\
+  func_expand3(ll, ll_type_name, name)
 
 #define ll()\
   join2(ll, ll_type_name, _)
@@ -34,20 +34,20 @@ typedef struct ll() {
   ll_node() *head, *tail;
 } ll();
 
-void             llfunc(ll, print_node_val)(ll_type_type, FILE*);
+void             llfunc(print_node_val)(ll_type_type, FILE*);
 
-ll()             llfunc(ll, new)();
-void             llfunc(ll, free)(ll()* ll);
+ll()             llfunc(new)();
+void             llfunc(free)(ll()* ll);
 
-const ll_node()* llfunc(ll, pushback)(ll()* ll, ll_type_type val);
-const ll_node()* llfunc(ll, pushfront)(ll()* ll, ll_type_type val);
+const ll_node()* llfunc(pushback)(ll()* ll, ll_type_type val);
+const ll_node()* llfunc(pushfront)(ll()* ll, ll_type_type val);
 
-ll_node()*       llfunc(ll, popback)(ll()* ll);
-ll_node()*       llfunc(ll, popfront)(ll()* ll);
+ll_node()*       llfunc(popback)(ll()* ll);
+ll_node()*       llfunc(popfront)(ll()* ll);
 
-ll_node()*       llfunc(ll, search)(ll()* ll, ll_type_type v);
+ll_node()*       llfunc(search)(ll()* ll, ll_type_type v);
 
-ll_type_type     llfunc(ll, count)(ll()* ll);
-bool             llfunc(ll, empty)(ll()* ll);
+ll_type_type     llfunc(count)(ll()* ll);
+bool             llfunc(empty)(ll()* ll);
 
-void             llfunc(ll, print)(ll()* ll, FILE* file);
+void             llfunc(print)(ll()* ll, FILE* file);

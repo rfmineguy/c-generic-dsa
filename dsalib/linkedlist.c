@@ -2,11 +2,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-ll() llfunc(ll, new)() {
+ll() llfunc(new)() {
   ll() ll = {0};
   return ll;
 }
-void llfunc(ll, free)(ll()* ll) {
+void llfunc(free)(ll()* ll) {
   const ll_node()* n = ll->head;
   while (n) {
     const ll_node()* t = n;
@@ -17,7 +17,7 @@ void llfunc(ll, free)(ll()* ll) {
   ll->tail = 0;
 }
 
-const ll_node()* llfunc(ll, pushback)(ll()* ll, int val) {
+const ll_node()* llfunc(pushback)(ll()* ll, int val) {
   ll_node()* n = calloc(1, sizeof(ll_node()));
   if (!n) return NULL;
   n->val = val;
@@ -38,7 +38,7 @@ const ll_node()* llfunc(ll, pushback)(ll()* ll, int val) {
   ll->tail = n;
   return n;
 }
-const ll_node()* llfunc(ll, pushfront)(ll()* ll, int val) {
+const ll_node()* llfunc(pushfront)(ll()* ll, int val) {
   ll_node()* n = calloc(1, sizeof(ll_node()));
   if (!n) return NULL;
   n->val = val;
@@ -60,7 +60,7 @@ const ll_node()* llfunc(ll, pushfront)(ll()* ll, int val) {
   return n;
 }
 
-ll_node()* llfunc(ll, popback)(ll()* ll) {
+ll_node()* llfunc(popback)(ll()* ll) {
   if (!ll->head && !ll->tail) 
     return 0;
   if (ll->head == ll->tail) {
@@ -74,7 +74,7 @@ ll_node()* llfunc(ll, popback)(ll()* ll) {
   ll->tail->next = 0;
   return n;
 }
-ll_node()* llfunc(ll, popfront)(ll()* ll) {
+ll_node()* llfunc(popfront)(ll()* ll) {
   if (!ll->head) return 0;
   if (ll->head == ll->tail) {
     ll_node() *n = ll->head;
@@ -87,12 +87,12 @@ ll_node()* llfunc(ll, popfront)(ll()* ll) {
   ll->head->prev = 0;
   return n;
 }
-ll_node()* llfunc(ll, search)(ll()* ll, int v) {
+ll_node()* llfunc(search)(ll()* ll, int v) {
   ll_node()* n = ll->head;
   while (n && n->val != v) n = n->next;
   return n;
 }
-int llfunc(ll, count)(ll()* ll) {
+int llfunc(count)(ll()* ll) {
   int count = 0;
   ll_node()* n = ll->head;
   while (n) {
@@ -101,14 +101,14 @@ int llfunc(ll, count)(ll()* ll) {
   }
   return count;
 }
-bool llfunc(ll, empty)(ll()* ll) {
+bool llfunc(empty)(ll()* ll) {
   return ll->head == 0;
 }
 
-void llfunc(ll, print)(ll()* ll, FILE* fptr) {
+void llfunc(print)(ll()* ll, FILE* fptr) {
   ll_node() *n = ll->head;
   while (n) {
-    llfunc(ll, print_node_val)(n->val, fptr);
+    llfunc(print_node_val)(n->val, fptr);
     if (n->next)
       fprintf(fptr, " -> ");
     n = n->next;
