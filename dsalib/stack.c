@@ -2,12 +2,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-stack() stackfunc(stack, new)() {
+stack() stackfunc(new)() {
   stack() s = {.head = 0};
   return s;
 }
 
-void stackfunc(stack, free)(stack()* stack) {
+void stackfunc(free)(stack()* stack) {
   struct stack_node()* n = stack->head;
   while (n) {
     struct stack_node()* t = n;
@@ -17,7 +17,7 @@ void stackfunc(stack, free)(stack()* stack) {
   stack->head = 0;
 }
 
-struct stack_node()* stackfunc(stack, push)(stack()* stack, stack_type_type val) {
+struct stack_node()* stackfunc(push)(stack()* stack, stack_type_type val) {
   struct stack_node()* n = calloc(1, sizeof(struct stack_node()));
   if (!n) return n;
   n->val = val;
@@ -34,7 +34,7 @@ struct stack_node()* stackfunc(stack, push)(stack()* stack, stack_type_type val)
   return n;
 }
 
-struct stack_node()* stackfunc(stack, pop)(stack()* stack) {
+struct stack_node()* stackfunc(pop)(stack()* stack) {
   if (!stack->head) return 0;
 
   struct stack_node()* n = stack->head;
@@ -42,19 +42,19 @@ struct stack_node()* stackfunc(stack, pop)(stack()* stack) {
   return n;
 }
 
-stack_type_type* stackfunc(stack, top)(const stack()* stack) {
+stack_type_type* stackfunc(top)(const stack()* stack) {
   if (!stack->head) return 0;
   return &stack->head->val;
 }
 
-bool stackfunc(stack, empty)(const stack()* stack) {
+bool stackfunc(empty)(const stack()* stack) {
   return stack->head == 0;
 }
 
-void stackfunc(stack, print)(const stack()* stack) {
+void stackfunc(print)(const stack()* stack) {
   struct stack_node()* n = stack->head;
   while (n) {
-    stackfunc(stack, print_node_val)(n->val);
+    stackfunc(print_node_val)(n->val);
     if (n->next) printf(" -> ");
     n = n->next;
   }
