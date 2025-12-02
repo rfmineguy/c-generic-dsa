@@ -50,3 +50,8 @@ bool dafunc(delete_at)(da()* da, int index, da_type_type* out_removed) {
   da->size--;
   return true;
 }
+
+da_type_type* dafunc(at)(da()* da, int index) {
+  if (index < 0 || index >= da->size) return 0;
+  return &da->buffer[index];
+}
