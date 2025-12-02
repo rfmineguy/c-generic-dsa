@@ -21,6 +21,12 @@ typedef struct bst_int_node bst_int_node;     // forward declare the bst node ty
 #undef bst_type_type                          // -
 #undef q_type_type                            // -
 #undef q_type_name                            // -
+#undef stack_type_type                        // -
+#undef stack_type_name                        // -
+
+#define stack_type_type bst_int_node*         // tell the stack what it is storing
+#define stack_type_name bst_int_node          // -
+#include "../dsalib/stack.h"
 
 #define q_type_type bst_int_node*             // tell the queue what it is storing
 #define q_type_name bst_int_node              // -
@@ -39,7 +45,11 @@ typedef struct bst_int_node bst_int_node;     // forward declare the bst node ty
 #include <stdio.h>
 typedef struct bst_int_node bst_int_node;     // forward declare the bst node like before
 
-#define q_type_type bst_int_node*             // tell the queue what it is store again
+#define stack_type_type bst_int_node*         // tell the stack what it is storing
+#define stack_type_name bst_int_node          // -
+#include "../dsalib/stack.c"
+
+#define q_type_type bst_int_node*             // tell the queue what it is storing
 #define q_type_name bst_int_node              // -
 #define Q_ALLOW_DIRECT_INCLUDE
 #include "../dsalib/queue.c"
@@ -57,6 +67,10 @@ void bst_int_print_val(int val) {
 }
 
 void q_bst_int_node_print_node_val(bst_int_node* val) {
+  bst_int_print_val(val->val);
+}
+
+void stack_bst_int_node_print_node_val(bst_int_node* val) {
   bst_int_print_val(val->val);
 }
 
