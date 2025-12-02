@@ -19,3 +19,11 @@ void dafunc(free)(da()* da) {
   free(da->buffer);
   da->buffer = 0;
 }
+
+bool dafunc(append)(da()* da, da_type_type v) {
+  if (da->size + 1 >= da->capacity) {
+    if (!dafunc(grow)(da)) return false;
+  }
+  da->buffer[da->size++] = v;
+  return true;
+}
