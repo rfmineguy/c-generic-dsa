@@ -2,14 +2,14 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-linkedlist ll_new() {
-  linkedlist ll = {0};
+ll() llfunc(ll, new)() {
+  ll() ll = {0};
   return ll;
 }
-void ll_free(linkedlist* ll) {
-  const linkedlist_node* n = ll->head;
+void llfunc(ll, free)(ll()* ll) {
+  const ll_node()* n = ll->head;
   while (n) {
-    const linkedlist_node* t = n;
+    const ll_node()* t = n;
     free((void*)t);
     n = n->next;
   }
@@ -17,89 +17,101 @@ void ll_free(linkedlist* ll) {
   ll->tail = 0;
 }
 
-int ll_pushback(linkedlist* ll, int val) {
-  linkedlist_node* n = calloc(1, sizeof(linkedlist_node));
-  if (!n) return 1;
+const ll_node()* llfunc(ll, pushback)(ll()* ll, int val) {
+  ll_node()* n = calloc(1, sizeof(ll_node()));
+  if (!n) return NULL;
   n->val = val;
 
   if (!ll->head && !ll->tail) {
     ll->head = n;
     ll->tail = ll->head;
-    return 0;
+    return n;
   }
   if (ll->head == ll->tail) {
     n->prev = ll->tail;
     ll->tail->next = n;
     ll->tail = n;
-    return 0;
+    return n;
   }
   n->prev = ll->tail;
   ll->tail->next = n;
   ll->tail = n;
-  return 0;
+  return n;
 }
-int ll_pushfront(linkedlist* ll, int val) {
-  linkedlist_node* n = calloc(1, sizeof(linkedlist_node));
-  if (!n) return 1;
+const ll_node()* llfunc(ll, pushfront)(ll()* ll, int val) {
+  ll_node()* n = calloc(1, sizeof(ll_node()));
+  if (!n) return NULL;
   n->val = val;
 
   if (!ll->head && !ll->tail) {
     ll->head = n;
     ll->tail = ll->head;
-    return 0;
+    return n;
   }
   if (ll->head == ll->tail) {
     n->next = ll->head;
     ll->head->prev = n;
     ll->head = n;
-    return 0;
+    return n;
   }
   n->next = ll->head;
   ll->head->prev = n;
   ll->head = n;
-  return 0;
+  return n;
 }
 
-linkedlist_node* ll_popback(linkedlist* ll) {
-  if (!ll->head) return 0;
+ll_node()* llfunc(ll, popback)(ll()* ll) {
+  if (!ll->head && !ll->tail) 
+    return 0;
   if (ll->head == ll->tail) {
-    linkedlist_node *n = ll->head;
+    ll_node() *n = ll->tail;
     ll->head = 0;
     ll->tail = 0;
     return n;
   }
-  linkedlist_node* n = ll->tail;
+  ll_node()* n = ll->tail;
   ll->tail = ll->tail->prev;
   ll->tail->next = 0;
   return n;
 }
-linkedlist_node* ll_popfront(linkedlist* ll) {
+ll_node()* llfunc(ll, popfront)(ll()* ll) {
   if (!ll->head) return 0;
   if (ll->head == ll->tail) {
-    linkedlist_node *n = ll->head;
+    ll_node() *n = ll->head;
     ll->head = 0;
     ll->tail = 0;
     return n;
   }
-  linkedlist_node* n = ll->head;
+  ll_node()* n = ll->head;
   ll->head = ll->head->next;
   ll->head->prev = 0;
   return n;
 }
-linkedlist_node* ll_search(linkedlist* ll, int v) {
-  linkedlist_node* n = ll->head;
+ll_node()* llfunc(ll, search)(ll()* ll, int v) {
+  ll_node()* n = ll->head;
   while (n && n->val != v) n = n->next;
   return n;
 }
-int ll_count(linkedlist* ll) {
+int llfunc(ll, count)(ll()* ll) {
   int count = 0;
-  linkedlist_node* n = ll->head;
+  ll_node()* n = ll->head;
   while (n) {
     count++;
     n = n->next;
   }
   return count;
 }
-bool ll_empty(linkedlist* ll) {
+bool llfunc(ll, empty)(ll()* ll) {
   return ll->head == 0;
+}
+
+void llfunc(ll, print)(ll()* ll, FILE* fptr) {
+  ll_node() *n = ll->head;
+  while (n) {
+    llfunc(ll, print_node_val)(n->val, fptr);
+    if (n->next)
+      fprintf(fptr, " -> ");
+    n = n->next;
+  }
+  fprintf(fptr, "\n");
 }
