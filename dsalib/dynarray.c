@@ -27,3 +27,16 @@ bool dafunc(append)(da()* da, da_type_type v) {
   da->buffer[da->size++] = v;
   return true;
 }
+
+bool dafunc(insert_at)(da()* da, int index, da_type_type v) {
+  if (index < 0 || index > da->size) return false;
+  if (da->size + 1 > da->capacity) {
+    if (!dafunc(grow)(da)) return false;
+  }
+  da->size++;
+  for (int i = da->size; i > index; i--) {
+    da->buffer[i] = da->buffer[i - 1];
+  }
+  da->buffer[index] = v;
+  return true;
+}
