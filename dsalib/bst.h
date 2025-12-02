@@ -16,8 +16,8 @@
 #define bst_node()  join3(bst, bst_type_name, node, _)
 #define bst()       join2(bst, bst_type_name, _)
 
-#define bstfunc(namespace, name)\
-  func_expand3(namespace, bst_type_name, name)
+#define bstfunc(name)\
+  func_expand3(bst, bst_type_name, name)
 
 typedef enum {
   BFS,
@@ -46,21 +46,21 @@ typedef struct bst() {
   bst_node()* root;
 } bst();
 
-bst() bstfunc(bst, new)();
-void  bstfunc(bst, free)(bst()* b);
+bst() bstfunc(new)();
+void  bstfunc(free)(bst()* b);
 
-int        bstfunc(bst, cmp)(bst_type_type, bst_type_type);
+int        bstfunc(cmp)(bst_type_type, bst_type_type);
 
-void       bstfunc(bst, insert)(bst()* b, bst_type_type);
-bst_node()*bstfunc(bst, delete)(bst()* b, bst_type_type);
-bst_type_type* bstfunc(bst, search)(bst()* b, bst_type_type);
+void       bstfunc(insert)(bst()* b, bst_type_type);
+bst_node()*bstfunc(delete)(bst()* b, bst_type_type);
+bst_type_type* bstfunc(search)(bst()* b, bst_type_type);
 
-void       bstfunc(bst, print_val)(bst_type_type);
-void       bstfunc(bst, print)(bst()* b);
-void       bstfunc(bst, print_dot)(bst()* b);
+void       bstfunc(print_val)(bst_type_type);
+void       bstfunc(print)(bst()* b);
+void       bstfunc(print_dot)(bst()* b);
 
-bst_iter() bstfunc(bst, begin)(bst()* b, itertype iter_type);
-int        bstfunc(bst, end)(bst()* b, bst_iter() it);
-bst_iter() bstfunc(bst, next)(bst()* b, bst_iter() it);
+bst_iter() bstfunc(begin)(bst()* b, itertype iter_type);
+int        bstfunc(end)(bst()* b, bst_iter() it);
+bst_iter() bstfunc(next)(bst()* b, bst_iter() it);
 
 #endif

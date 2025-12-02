@@ -16,42 +16,42 @@
 
 static int var(bst, rec_depth)[1000];
 
-static void bstfunc(bst, free_node)(struct bst_node()** n) {
+static void bstfunc(free_node)(struct bst_node()** n) {
   if (!*(n)) return;
-  if ((*n)->left) bstfunc(bst, free_node)(&(*n)->left);
-  if ((*n)->right) bstfunc(bst, free_node)(&(*n)->right);
+  if ((*n)->left) bstfunc(free_node)(&(*n)->left);
+  if ((*n)->right) bstfunc(free_node)(&(*n)->right);
   free((*n));
   *n = 0;
 }
 
-static void bstfunc(bst, insert_node)(struct bst_node()** root, bst_type_type v) {
+static void bstfunc(insert_node)(struct bst_node()** root, bst_type_type v) {
   if (!(*root)) {
     *root = calloc(1, sizeof(struct bst_node()));
     (*root)->val = v;
     (*root)->count = 1;
     return;
   }
-  int cmp = bstfunc(bst, cmp)(v, (*root)->val);
+  int cmp = bstfunc(cmp)(v, (*root)->val);
   if (cmp == 0) (*root)->count++;
-  if (cmp < 0) bstfunc(bst, insert_node)(&(*root)->left, v);
-  if (cmp > 0) bstfunc(bst, insert_node)(&(*root)->right, v);
+  if (cmp < 0) bstfunc(insert_node)(&(*root)->left, v);
+  if (cmp > 0) bstfunc(insert_node)(&(*root)->right, v);
 }
 
-static struct bst_node()* bstfunc(bst, search_node)(struct bst_node()* root, bst_type_type v) {
+static struct bst_node()* bstfunc(search_node)(struct bst_node()* root, bst_type_type v) {
   if (!root) return 0;
 
-  int cmp = bstfunc(bst, cmp)(v, root->val);
+  int cmp = bstfunc(cmp)(v, root->val);
   if (cmp == 0) return root;
-  if (cmp < 0) return bstfunc(bst, search_node)(root->left, v);
-  return bstfunc(bst, search_node)(root->right, v);
+  if (cmp < 0) return bstfunc(search_node)(root->left, v);
+  return bstfunc(search_node)(root->right, v);
 }
 
-static struct bst_node()* bstfunc(bst, delete_node)(struct bst_node()** root, bst_type_type v) {
+static struct bst_node()* bstfunc(delete_node)(struct bst_node()** root, bst_type_type v) {
   if (!(*root)) return 0;
-  int cmp = bstfunc(bst, cmp)(v, (*root)->val);
+  int cmp = bstfunc(cmp)(v, (*root)->val);
 
-  if (cmp < 0)      return bstfunc(bst, delete_node)(&(*root)->left, v);
-  else if (cmp > 0) return bstfunc(bst, delete_node)(&(*root)->right, v);
+  if (cmp < 0)      return bstfunc(delete_node)(&(*root)->left, v);
+  else if (cmp > 0) return bstfunc(delete_node)(&(*root)->right, v);
   else {
     struct bst_node() *target = (*root);
     if ((*root)->count > 1) {
@@ -83,7 +83,7 @@ static struct bst_node()* bstfunc(bst, delete_node)(struct bst_node()** root, bs
   }
 }
 
-static void bstfunc(bst, print_node)(struct bst_node()* root, int depth, int is_last) {
+static void bstfunc(print_node)(struct bst_node()* root, int depth, int is_last) {
     if (!root) return;
 
     for (int i = 0; i < depth; i++) {
@@ -96,7 +96,7 @@ static void bstfunc(bst, print_node)(struct bst_node()* root, int depth, int is_
         }
     }
 
-    bstfunc(bst, print_val)(root->val);
+    bstfunc(print_val)(root->val);
     printf(" (%d)\n", root->count);
 
     // Mark whether at this depth we should draw a vertical continuation later
@@ -108,73 +108,73 @@ static void bstfunc(bst, print_node)(struct bst_node()* root, int depth, int is_
 
     if (has_left) {
       var(bst, rec_depth)[depth] = has_right ? 1 : 0;
-      bstfunc(bst, print_node)(root->left, depth + 1, has_right ? 0 : 1);
+      bstfunc(print_node)(root->left, depth + 1, has_right ? 0 : 1);
       var(bst, rec_depth)[depth] = 0;
     }
 
     if (has_right) {
       var(bst, rec_depth)[depth] = 0;
-      bstfunc(bst, print_node)(root->right, depth + 1, 1); // right child is always last
+      bstfunc(print_node)(root->right, depth + 1, 1); // right child is always last
       var(bst, rec_depth)[depth] = 0;
     }
 }
 
-bst() bstfunc(bst, new)() {
+bst() bstfunc(new)() {
   return (bst()){.root = 0};
 }
-void  bstfunc(bst, free)(bst()* b) {
-  bstfunc(bst, free_node)(&b->root);
+void  bstfunc(free)(bst()* b) {
+  bstfunc(free_node)(&b->root);
   b->root = 0;
 }
 
-void bstfunc(bst, insert)(bst()* b, bst_type_type v) {
-  bstfunc(bst, insert_node)(&b->root, v);
+void bstfunc(insert)(bst()* b, bst_type_type v) {
+  bstfunc(insert_node)(&b->root, v);
 }
-struct bst_node()* bstfunc(bst, delete)(bst()* b, bst_type_type v) {
-  return bstfunc(bst, delete_node)(&b->root, v);
+struct bst_node()* bstfunc(delete)(bst()* b, bst_type_type v) {
+  return bstfunc(delete_node)(&b->root, v);
 }
-bst_type_type* bstfunc(bst, search)(bst()* b, bst_type_type v) {
-  struct bst_node()* n = bstfunc(bst, search_node)(b->root, v);
+bst_type_type* bstfunc(search)(bst()* b, bst_type_type v) {
+  struct bst_node()* n = bstfunc(search_node)(b->root, v);
   if (!n) return 0;
   return &n->val;
 }
-void bstfunc(bst, print)(bst()* b) {
+void bstfunc(print)(bst()* b) {
   memset(var(bst, rec_depth), 0, 1000);
   printf("------------\n");
-  if (b->root)  bstfunc(bst, print_node)(b->root, 0, 1);
+  if (b->root)  bstfunc(print_node)(b->root, 0, 1);
   printf("------------\n");
 }
 
-void bstfunc(bst, print_dot)(bst()* b) {
+void bstfunc(print_dot)(bst()* b) {
   printf("digraph {\n");
-  for (bst_iter() it = bstfunc(bst, begin)(b, BFS); !bstfunc(bst, end)(b, it); it = bstfunc(bst, next)(b, it)) {
-    bstfunc(bst, print_val)(it.node->val);
+  for (bst_iter() it = bstfunc(begin)(b, BFS); !bstfunc(end)(b, it); it = bstfunc(next)(b, it)) {
+    bstfunc(print_val)(it.node->val);
     printf(" -> {");
-    if (it.node->left)  bstfunc(bst, print_val)(it.node->left->val);
+    if (it.node->left)  bstfunc(print_val)(it.node->left->val);
     if (it.node->right) {
       printf(", ");
-      bstfunc(bst, print_val)(it.node->right->val);
+      bstfunc(print_val)(it.node->right->val);
     }
     printf(" }\n");
   }
   printf("}\n");
 }
 
-static bst_iter() bstfunc(bst, next_bfs)(bst()* b, bst_iter() it) {
-  if (qfunc(q, empty)(&it.dsa.q)) {
+static bst_iter() bstfunc(next_bfs)(bst()* b, bst_iter() it) {
+  if (qfunc(empty)(&it.dsa.q)) {
     return (bst_iter()) {.dsa.q = it.dsa.q, .node = 0, .end = 1, .iter_type = it.iter_type};
   }
-  it.node = qfunc(q, dequeue)(&it.dsa.q)->val;
-  if (it.node->left)  qfunc(q, enqueue)(&it.dsa.q, it.node->left);
-  if (it.node->right) qfunc(q, enqueue)(&it.dsa.q, it.node->right);
+  it.node = qfunc(dequeue)(&it.dsa.q)->val;
+  if (it.node->left)  qfunc(enqueue)(&it.dsa.q, it.node->left);
+  if (it.node->right) qfunc(enqueue)(&it.dsa.q, it.node->right);
   return it;
 }
 
-static bst_iter() bstfunc(bst, next_dfs_inorder)(bst()* b, bst_iter() it) {
-  if (!stackfunc(stack, top)(&it.dsa.stack)) 
+static bst_iter() bstfunc(next_dfs_inorder)(bst()* b, bst_iter() it) {
+  if (!stackfunc(top)(&it.dsa.stack)) 
     return (bst_iter()) {.dsa.stack = it.dsa.stack, .node = 0, .end = 1, .iter_type = it.iter_type};
 
-  bst_node()* n = stackfunc(stack, pop)(&it.dsa.stack)->val;
+  bst_node()* n = stackfunc(pop)(&it.dsa.stack)->val;
   if (!n) {
     it.end = 1;
     return it;
@@ -183,41 +183,41 @@ static bst_iter() bstfunc(bst, next_dfs_inorder)(bst()* b, bst_iter() it) {
 
   bst_node()* right = n->right;
   while (right) {
-    stackfunc(stack, push)(&it.dsa.stack, right);
+    stackfunc(push)(&it.dsa.stack, right);
     right = right->left;
   }
   return it;
 }
 
-static bst_iter() bstfunc(bst, next_dfs_preorder)(bst()* b, bst_iter() it) {
-  if (!stackfunc(stack, top)(&it.dsa.stack)) 
+static bst_iter() bstfunc(next_dfs_preorder)(bst()* b, bst_iter() it) {
+  if (!stackfunc(top)(&it.dsa.stack)) 
     return (bst_iter()) {.dsa.stack = it.dsa.stack, .node = 0, .end = 1, .iter_type = it.iter_type};
 
-  bst_node()* n = stackfunc(stack, pop)(&it.dsa.stack)->val;
+  bst_node()* n = stackfunc(pop)(&it.dsa.stack)->val;
   it.node = n;
 
-  if (n->right) stackfunc(stack, push)(&it.dsa.stack, n->right);
-  if (n->left) stackfunc(stack, push)(&it.dsa.stack, n->left);
+  if (n->right) stackfunc(push)(&it.dsa.stack, n->right);
+  if (n->left) stackfunc(push)(&it.dsa.stack, n->left);
 
   return it;
 }
 
-static bst_iter() bstfunc(bst, next_dfs_postorder)(bst()* b, bst_iter() it) {
+static bst_iter() bstfunc(next_dfs_postorder)(bst()* b, bst_iter() it) {
   return (bst_iter()){};
 }
 
-bst_iter() bstfunc(bst, begin)(bst()* b, itertype iter_type) {
+bst_iter() bstfunc(begin)(bst()* b, itertype iter_type) {
   bst_iter() it = {};
   it.iter_type = iter_type;
   it.end = 0;
   switch (it.iter_type) {
     case BFS: {
-      qfunc(q, free)(&it.dsa.q);
-      it.dsa.q = qfunc(q, new)();
+      qfunc(free)(&it.dsa.q);
+      it.dsa.q = qfunc(new)();
       it.node = b->root;
       if (b->root) {
-        if (b->root->left) qfunc(q, enqueue)(&it.dsa.q, b->root->left);
-        if (b->root->right) qfunc(q, enqueue)(&it.dsa.q, b->root->right);
+        if (b->root->left) qfunc(enqueue)(&it.dsa.q, b->root->left);
+        if (b->root->right) qfunc(enqueue)(&it.dsa.q, b->root->right);
       }
       else {
         it.end = 1;
@@ -225,24 +225,24 @@ bst_iter() bstfunc(bst, begin)(bst()* b, itertype iter_type) {
       break;
     }
     case DFS_INORDER: {
-      stackfunc(stack, free)(&it.dsa.stack);
-      it.dsa.stack = stackfunc(stack, new)();
+      stackfunc(free)(&it.dsa.stack);
+      it.dsa.stack = stackfunc(new)();
       bst_node()* curr = b->root;
       while (curr) {
-        stackfunc(stack, push)(&it.dsa.stack, curr);
+        stackfunc(push)(&it.dsa.stack, curr);
         curr = curr->left;
       }
-      it.node = stackfunc(stack, pop)(&it.dsa.stack)->val;
+      it.node = stackfunc(pop)(&it.dsa.stack)->val;
       if (!it.node) it.end = 1;
       break;
     }
     case DFS_PREORDER: {
-      stackfunc(stack, free)(&it.dsa.stack);
-      it.dsa.stack = stackfunc(stack, new)();
+      stackfunc(free)(&it.dsa.stack);
+      it.dsa.stack = stackfunc(new)();
       it.node = b->root;
       if (b->root) {
-        if (b->root->left) stackfunc(stack, push)(&it.dsa.stack, b->root->left);
-        if (b->root->right) stackfunc(stack, push)(&it.dsa.stack, b->root->right);
+        if (b->root->left) stackfunc(push)(&it.dsa.stack, b->root->left);
+        if (b->root->right) stackfunc(push)(&it.dsa.stack, b->root->right);
       }
       else {
         it.end = 1;
@@ -254,16 +254,16 @@ bst_iter() bstfunc(bst, begin)(bst()* b, itertype iter_type) {
   return it;
 }
 
-int bstfunc(bst, end)(bst()* b, bst_iter() it) {
+int bstfunc(end)(bst()* b, bst_iter() it) {
   return it.end;
 }
 
-bst_iter() bstfunc(bst, next)(bst()* b, bst_iter() it) {
+bst_iter() bstfunc(next)(bst()* b, bst_iter() it) {
   switch (it.iter_type) {
-    case BFS:          return bstfunc(bst, next_bfs)(b, it); break;
-    case DFS_INORDER:  return bstfunc(bst, next_dfs_inorder)(b, it); break;
-    case DFS_PREORDER: return bstfunc(bst, next_dfs_preorder)(b, it); break;
-    case DFS_POSTORDER: return bstfunc(bst, next_dfs_postorder)(b, it); break;
+    case BFS:          return bstfunc(next_bfs)(b, it); break;
+    case DFS_INORDER:  return bstfunc(next_dfs_inorder)(b, it); break;
+    case DFS_PREORDER: return bstfunc(next_dfs_preorder)(b, it); break;
+    case DFS_POSTORDER: return bstfunc(next_dfs_postorder)(b, it); break;
     default: assert(0 && "Not implmented");
   }
 }
