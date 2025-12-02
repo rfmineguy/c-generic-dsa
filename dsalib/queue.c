@@ -5,11 +5,11 @@
 #error "This file is not intended to be compiled directly"
 #endif
 
-q() qfunc(q, new)() {
+q() qfunc(new)() {
   q() q = {0};
   return q;
 }
-void qfunc(q, free)(q()* q) {
+void qfunc(free)(q()* q) {
   if (!q->head) return;
   q_node()* n = q->head;
   while (n) {
@@ -20,7 +20,7 @@ void qfunc(q, free)(q()* q) {
   q->head = 0;
   q->tail = 0;
 }
-q_node()* qfunc(q, enqueue)(q() *q, q_type_type val) {
+q_node()* qfunc(enqueue)(q() *q, q_type_type val) {
   q_node()* n = calloc(1, sizeof(q_node()));
   if (!n) return 0;
   n->val = val;
@@ -35,23 +35,23 @@ q_node()* qfunc(q, enqueue)(q() *q, q_type_type val) {
   q->tail = n;
   return n;
 }
-q_node()* qfunc(q, dequeue)(q() *q) {
+q_node()* qfunc(dequeue)(q() *q) {
   if (!q->head) return 0;
   q_node()* n = q->head;
   q->head = q->head->next;
   if (!q->head) q->tail = 0;
   return n;
 }
-q_type_type* qfunc(q, front)(const q() *q) {
+q_type_type* qfunc(front)(const q() *q) {
   if (!q->head) return 0;
   return &q->head->val;
 }
-bool qfunc(q, empty)(const q() *q) {
+bool qfunc(empty)(const q() *q) {
   return q->head == q->tail && !q->head;
 }
-void qfunc(q, print)(q() *q) {
+void qfunc(print)(q() *q) {
   for (q_node()* n = q->head; n != q->tail; n = n->next) {
-    qfunc(q, print_node_val)(n->val);
+    qfunc(print_node_val)(n->val);
     if (n->next) printf(", ");
   }
   printf("\n");

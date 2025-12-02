@@ -14,8 +14,8 @@
 #error "Must define q_type_name macro"
 #endif
 
-#define qfunc(namespace, name)\
-  func_expand3(namespace, q_type_name, name)
+#define qfunc(name)\
+  func_expand3(q, q_type_name, name)
 
 #define q()\
   join2(q, q_type_name, _)
@@ -31,13 +31,13 @@ typedef struct q() {
   q_node() *head, *tail;
 } q();
 
-void        qfunc(q, print_node_val)(q_type_type val);
+void        qfunc(print_node_val)(q_type_type val);
 
-q()         qfunc(q, new)();
-void        qfunc(q, free)(q()* q);
-q_node()*   qfunc(q, enqueue)(q()* q, q_type_type val);
-q_node()*   qfunc(q, dequeue)(q()* q);
-q_type_type*qfunc(q, front)(const q()* q);
-bool        qfunc(q, empty)(const q()* q);
+q()         qfunc(new)();
+void        qfunc(free)(q()* q);
+q_node()*   qfunc(enqueue)(q()* q, q_type_type val);
+q_node()*   qfunc(dequeue)(q()* q);
+q_type_type*qfunc(front)(const q()* q);
+bool        qfunc(empty)(const q()* q);
 
-void        qfunc(q, print)(q()* q);
+void        qfunc(print)(q()* q);
