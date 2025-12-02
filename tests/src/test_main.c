@@ -73,6 +73,16 @@ MunitTest stack_int[] = {
   { NULL, NULL, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL }
 };
 
+MunitTest da_int[] = {
+  { "/new",       da_int_test_new, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/free",      da_int_test_free, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/append",    da_int_test_append, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/insert_at", da_int_test_insert_at, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/delete_at", da_int_test_delete_at, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/at",        da_int_test_at, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { NULL, NULL, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL }
+};
+
 MunitSuite all_suites[] = {
   { "/ht_str_int", ht_str_int, NULL, 1, MUNIT_SUITE_OPTION_NONE },
   { "/ll_int",     ll_int, NULL, 1, MUNIT_SUITE_OPTION_NONE },
@@ -81,6 +91,7 @@ MunitSuite all_suites[] = {
   { "/bst_int",    bst_int,  NULL, 1, MUNIT_SUITE_OPTION_NONE },
   { "/bst_str",    bst_str,  NULL, 1, MUNIT_SUITE_OPTION_NONE },
   { "/stack_int",  stack_int,  NULL, 1, MUNIT_SUITE_OPTION_NONE },
+  { "/da_int",     da_int,  NULL, 1, MUNIT_SUITE_OPTION_NONE },
   {NULL, NULL, NULL, 0, MUNIT_SUITE_OPTION_NONE},
 };
 

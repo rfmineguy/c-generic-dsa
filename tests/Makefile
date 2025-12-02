@@ -11,6 +11,7 @@ TESTS_SOURCES := $(THIS_DIR)/src/ht_str_int.c\
 								 $(THIS_DIR)/src/bst_int.c\
 								 $(THIS_DIR)/src/bst_str.c\
 								 $(THIS_DIR)/src/stack_int.c\
+								 $(THIS_DIR)/src/da_int.c\
 								 $(THIS_DIR)/src/munit.c\
 								 $(THIS_DIR)/src/test_main.c
 

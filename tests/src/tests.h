@@ -54,4 +54,11 @@ MunitResult stack_int_test_pop(const MunitParameter [], void*);
 MunitResult stack_int_test_top(const MunitParameter [], void*);
 MunitResult stack_int_test_empty(const MunitParameter [], void*);
 
+MunitResult da_int_test_new(const MunitParameter [], void*);
+MunitResult da_int_test_free(const MunitParameter [], void*);
+MunitResult da_int_test_append(const MunitParameter [], void*);
+MunitResult da_int_test_insert_at(const MunitParameter [], void*);
+MunitResult da_int_test_delete_at(const MunitParameter [], void*);
+MunitResult da_int_test_at(const MunitParameter [], void*);
+
 #endif
