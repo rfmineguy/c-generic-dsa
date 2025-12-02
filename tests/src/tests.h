@@ -2,11 +2,11 @@
 #define TESTS_H
 #include "munit.h"
 
-MunitResult ht_test_new(const MunitParameter[], void*);
-MunitResult ht_test_free(const MunitParameter[], void*);
-MunitResult ht_test_put(const MunitParameter[], void*);
-MunitResult ht_test_remove(const MunitParameter[], void*);
-MunitResult ht_test_iterator(const MunitParameter[], void*);
+MunitResult ht_str_int_test_new(const MunitParameter[], void*);
+MunitResult ht_str_int_test_free(const MunitParameter[], void*);
+MunitResult ht_str_int_test_put(const MunitParameter[], void*);
+MunitResult ht_str_int_test_remove(const MunitParameter[], void*);
+MunitResult ht_str_int_test_iterator(const MunitParameter[], void*);
 
 MunitResult ll_int_test_new(const MunitParameter[], void*);
 MunitResult ll_int_test_free(const MunitParameter[], void*);

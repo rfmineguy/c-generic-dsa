@@ -1,11 +1,11 @@
 #include "tests.h"
 
-MunitTest ht[] = {
-  { "/new",      ht_test_new, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
-  { "/free",     ht_test_free, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
-  { "/put",      ht_test_put, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
-  { "/rem",      ht_test_remove, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
-  { "/iterator", ht_test_iterator, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+MunitTest ht_str_int[] = {
+  { "/new",      ht_str_int_test_new, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/free",     ht_str_int_test_free, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/put",      ht_str_int_test_put, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/rem",      ht_str_int_test_remove, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { "/iterator", ht_str_int_test_iterator, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
   { NULL, NULL, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL }
 };
 
@@ -74,13 +74,13 @@ MunitTest stack_int[] = {
 };
 
 MunitSuite all_suites[] = {
-  { "/ht",      ht, NULL, 1, MUNIT_SUITE_OPTION_NONE },
-  { "/ll_int",  ll_int, NULL, 1, MUNIT_SUITE_OPTION_NONE },
-  { "/q_int",   q_int,  NULL, 1, MUNIT_SUITE_OPTION_NONE },
-  { "/q_str",   q_str,  NULL, 1, MUNIT_SUITE_OPTION_NONE },
-  { "/bst_int", bst_int,  NULL, 1, MUNIT_SUITE_OPTION_NONE },
-  { "/bst_str", bst_str,  NULL, 1, MUNIT_SUITE_OPTION_NONE },
-  { "/stack_int", stack_int,  NULL, 1, MUNIT_SUITE_OPTION_NONE },
+  { "/ht_str_int", ht_str_int, NULL, 1, MUNIT_SUITE_OPTION_NONE },
+  { "/ll_int",     ll_int, NULL, 1, MUNIT_SUITE_OPTION_NONE },
+  { "/q_int",      q_int,  NULL, 1, MUNIT_SUITE_OPTION_NONE },
+  { "/q_str",      q_str,  NULL, 1, MUNIT_SUITE_OPTION_NONE },
+  { "/bst_int",    bst_int,  NULL, 1, MUNIT_SUITE_OPTION_NONE },
+  { "/bst_str",    bst_str,  NULL, 1, MUNIT_SUITE_OPTION_NONE },
+  { "/stack_int",  stack_int,  NULL, 1, MUNIT_SUITE_OPTION_NONE },
   {NULL, NULL, NULL, 0, MUNIT_SUITE_OPTION_NONE},
 };
 

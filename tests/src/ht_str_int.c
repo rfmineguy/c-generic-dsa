@@ -70,7 +70,7 @@ test_pair test_pairs[200] = {
     {"k197", 328}, {"k198", 702}, {"k199", 470}, {"k200", 999}
 };
 
-MunitResult ht_test_new(const MunitParameter params[], void* user_data_or_fixture) {
+MunitResult ht_str_int_test_new(const MunitParameter params[], void* user_data_or_fixture) {
   ht_str_int h = ht_str_int_new(10);
   munit_assert_int(h.buckets_count, ==, 10);
   for (int i = 0; i < h.buckets_count; i++) {
@@ -79,7 +79,7 @@ MunitResult ht_test_new(const MunitParameter params[], void* user_data_or_fixtur
   return MUNIT_OK;
 }
 
-MunitResult ht_test_free(const MunitParameter params[], void* user_data_or_fixture) {
+MunitResult ht_str_int_test_free(const MunitParameter params[], void* user_data_or_fixture) {
   ht_str_int h = ht_str_int_new(10);
   ht_str_int_put(&h, "something", 4);
   ht_str_int_free(&h);
@@ -90,7 +90,7 @@ MunitResult ht_test_free(const MunitParameter params[], void* user_data_or_fixtu
   return MUNIT_OK;
 }
 
-MunitResult ht_test_put(const MunitParameter params[], void* user_data_or_fixture) {
+MunitResult ht_str_int_test_put(const MunitParameter params[], void* user_data_or_fixture) {
   ht_str_int h = ht_str_int_new(10);
   // 1. put the test_pairs into the table 
   for (int i = 0; i < TEST_PAIR_COUNT; i++) {
@@ -110,7 +110,7 @@ MunitResult ht_test_put(const MunitParameter params[], void* user_data_or_fixtur
   return MUNIT_OK;
 }
 
-MunitResult ht_test_remove(const MunitParameter params[], void* user_data_or_fixture) {
+MunitResult ht_str_int_test_remove(const MunitParameter params[], void* user_data_or_fixture) {
   ht_str_int h = ht_str_int_new(10);
   // 1. put the test_pairs into the table 
   for (int i = 0; i < TEST_PAIR_COUNT; i++) {
@@ -136,7 +136,7 @@ MunitResult ht_test_remove(const MunitParameter params[], void* user_data_or_fix
   return MUNIT_OK;
 }
 
-MunitResult ht_test_iterator(const MunitParameter params[], void* user_data_or_fixture) {
+MunitResult ht_str_int_test_iterator(const MunitParameter params[], void* user_data_or_fixture) {
   ht_str_int h = ht_str_int_new(10);
 
   // 1. put the test_pairs into the table

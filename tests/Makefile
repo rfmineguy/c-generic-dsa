@@ -4,7 +4,7 @@ THIS_DIR   := $(dir $(abspath $(THIS_MAKEFILE)))
 OUT ?= out
 TESTS_OUTDIR := $(OUT)
 
-TESTS_SOURCES := $(THIS_DIR)/src/ht.c\
+TESTS_SOURCES := $(THIS_DIR)/src/ht_str_int.c\
 								 $(THIS_DIR)/src/ll_int.c\
 								 $(THIS_DIR)/src/queue_int.c\
 								 $(THIS_DIR)/src/queue_str.c\
