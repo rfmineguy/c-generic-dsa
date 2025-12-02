@@ -55,3 +55,13 @@ da_type_type* dafunc(at)(da()* da, int index) {
   if (index < 0 || index >= da->size) return 0;
   return &da->buffer[index];
 }
+
+void dafunc(print)(da()* da, FILE* f) {
+  fprintf(f, "[");
+  for (int i = 0; i < da->size; i++) {
+    dafunc(print_val)(da->buffer[i], f);
+    if (i < da->size - 1)
+      fprintf(f, ",");
+  }
+  fprintf(f, "]\n");
+}
