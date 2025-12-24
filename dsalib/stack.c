@@ -51,10 +51,10 @@ bool stackfunc(empty)(const stack()* stack) {
   return stack->head == 0;
 }
 
-void stackfunc(print)(const stack()* stack) {
+void stackfunc(print)(FILE* f, const stack()* stack) {
   struct stack_node()* n = stack->head;
   while (n) {
-    stackfunc(print_node_val)(n->val);
+    stackfunc(print_node_val)(f, n->val);
     if (n->next) printf(" -> ");
     n = n->next;
   }

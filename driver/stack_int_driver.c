@@ -5,7 +5,7 @@ void stack_int_driver() {
   stack_int stack = stack_int_new();
   stack_int_push(&stack, 4);
   stack_int_push(&stack, 8);
-  stack_int_print(&stack);
+  stack_int_print(stdout, &stack);
 
   int* v;
   if ((v = stack_int_top(&stack))) {

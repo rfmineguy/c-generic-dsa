@@ -2,6 +2,7 @@
 #define STACK_TEMPLATE_H
 #include "dsa.h"
 #include <stdbool.h>
+#include <stdio.h>
 
 #ifndef stack_type_type
 #define stack_type_type int
@@ -28,7 +29,7 @@ typedef struct stack() {
   struct stack_node() *head;
 } stack();
 
-void                 stackfunc(print_node_val)(stack_type_type);
+void                 stackfunc(print_node_val)(FILE*, stack_type_type);
 
 stack()              stackfunc(new)();
 void                 stackfunc(free)(stack()*);
@@ -37,6 +38,6 @@ struct stack_node()* stackfunc(push)(stack()*, stack_type_type);
 struct stack_node()* stackfunc(pop)(stack()*);
 stack_type_type*     stackfunc(top)(const stack()*);
 bool                 stackfunc(empty)(const stack()*);
-void                 stackfunc(print)(const stack()*);
+void                 stackfunc(print)(FILE*, const stack()*);
 
 #endif
