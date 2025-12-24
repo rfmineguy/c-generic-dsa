@@ -92,6 +92,15 @@ static struct avl_node()* avlfunc(insert_node)(struct avl_node()** n, struct avl
   return inserted;
 }
 
+static struct avl_node()** avlfunc(search_node)(struct avl_node()** root, avl_type_type v) {
+  if (!(*root)) return 0;
+
+  int cmp = avlfunc(cmp)(v, (*root)->val);
+  if (cmp == 0) return root;
+  if (cmp < 0) return avlfunc(search_node)(&(*root)->left, v);
+  return avlfunc(search_node)(&(*root)->right, v);
+}
+
 static struct avl_node()* avlfunc(delete_node)(struct avl_node()** root, struct avl_node()* parent, avl_type_type v) {
   if (!(*root)) return 0;
   int cmp = avlfunc(cmp)(v, (*root)->val);
