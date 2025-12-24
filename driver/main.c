@@ -13,6 +13,7 @@ void bst_str_driver_iterator();
 void bst_str_driver_no_iterator();
 void ll_int_driver();
 void da_int_driver();
+void avl_int_driver();
 
 int main() {
   // ht_str_int_driver();
@@ -23,5 +24,6 @@ int main() {
   // bst_str_driver_iterator();
   // stack_int_driver();
   // ll_int_driver();
-  da_int_driver();
+  // da_int_driver();
+  avl_int_driver();
 }

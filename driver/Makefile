@@ -11,6 +11,7 @@ DRIVER_SOURCES := $(THIS_DIR)/main.c\
                   $(THIS_DIR)/stack_int_driver.c\
                   $(THIS_DIR)/ll_int_driver.c\
                   $(THIS_DIR)/da_int_driver.c\
+                  $(THIS_DIR)/avl_int_driver.c\
 
 driver_always:
 	mkdir -p $(OUT)
