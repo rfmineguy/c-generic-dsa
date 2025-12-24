@@ -303,12 +303,21 @@ void avlfunc(delete)(avl()* avl, int val) {
   }
 }
 
-void avl_generate_graph_node(avl_node* n, FILE* f) {
-  if (!n) return;
-  fprintf(f, "\t%d -> {", n->val);
-  if (n->left) avl_generate_graph_node(n->left, f);
-  if (n->right) avl_generate_graph_node(n->right, f);
-  fprintf(f, "\t}\n");
+void avlfunc(print_dot)(FILE* f, avl()* avl) {
+  fprintf(f, "digraph {\n");
+  for (struct avl_iter() it = avlfunc(begin)(avl, AVL_BFS); !avlfunc(end)(avl, it); it = avlfunc(next)(avl, it)) {
+    avlfunc(print_val)(f, it.node->val);
+    fprintf(f, " -> {");
+    if (it.node->left)  avlfunc(print_val)(f, it.node->left->val);
+    if (it.node->left && it.node->right) {
+      fprintf(f, ", ");
+    }
+    if (it.node->right) avlfunc(print_val)(f, it.node->right->val);
+    fprintf(f, " }\n");
+  }
+  fprintf(f, "}\n");
+}
+
 static avl_iter() avlfunc(next_bfs)(avl()* b, avl_iter() it) {
   if (qfunc(empty)(&it.dsa.q)) {
     return (avl_iter()) {.dsa.q = it.dsa.q, .node = 0, .end = 1, .iter_type = it.iter_type};
@@ -338,20 +347,13 @@ static avl_iter() avlfunc(next_dfs_inorder)(avl()* b, avl_iter() it) {
   return it;
 }
 
-void avl_generate_graph(avl* avl, FILE* f) {
-  q_avl_node q = q_avl_node_new();
-  q_avl_node_free(&q);
 static avl_iter() avlfunc(next_dfs_preorder)(avl()* b, avl_iter() it) {
   if (!stackfunc(top)(&it.dsa.stack)) 
     return (avl_iter()) {.dsa.stack = it.dsa.stack, .node = 0, .end = 1, .iter_type = it.iter_type};
 
-  fprintf(f, "digraph D{\n");
-  avl_generate_graph_node(avl->root, f);
-  fprintf(f, "}");
   avl_node()* n = stackfunc(pop)(&it.dsa.stack)->val;
   it.node = n;
 
-  q_avl_node_free(&q);
   if (n->right) stackfunc(push)(&it.dsa.stack, n->right);
   if (n->left) stackfunc(push)(&it.dsa.stack, n->left);
 
