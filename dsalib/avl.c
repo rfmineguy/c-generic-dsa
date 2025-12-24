@@ -72,6 +72,52 @@ static void avl_print_node(avl_node* n, int depth) {
   if (!n) {
     printf("%*.s|_ None\n", 2 * (depth), " ");
     return;
+static struct avl_node()* avlfunc(delete_node)(struct avl_node()** root, struct avl_node()* parent, avl_type_type v) {
+  if (!(*root)) return 0;
+  int cmp = avlfunc(cmp)(v, (*root)->val);
+
+  if (cmp < 0)      return avlfunc(delete_node)(&(*root)->left, *root, v);
+  else if (cmp > 0) return avlfunc(delete_node)(&(*root)->right, *root, v);
+  else {
+    struct avl_node() *target = (*root);
+    if ((*root)->count > 1) {
+      (*root)->count--;
+      return *root;
+    }
+    if ((*root)->left && (*root)->right) {
+      struct avl_node() *parent_ = *root;
+      struct avl_node() **left = &(*root)->left;
+      while ((*left)->right) {
+        parent_ = *left;
+        left = &(*left)->right;
+      }
+
+      avl_type_type v = (*left)->val;
+      (*left)->val = (*root)->val;
+      (*root)->val = v;
+
+      *left = (*left)->left;
+      if (*left)
+        (*left)->parent = parent_;
+      return parent_;
+    }
+    if ((*root)->left && !(*root)->right) {
+      (*root) = (*root)->left;
+      if (*root)
+        (*root)->parent = parent;
+      return parent;
+    }
+    if (!(*root)->left && (*root)->right) {
+      (*root) = (*root)->right;
+      if (*root)
+        (*root)->parent = parent;
+      return parent;
+    }
+    *root = 0;
+    avlfunc(update_height)(parent);
+    return parent;
+  }
+}
   }
   printf("%*.s|_ %d\n", 2 * depth, " ", n->val);
   avl_print_node(n->left, depth + 1);
