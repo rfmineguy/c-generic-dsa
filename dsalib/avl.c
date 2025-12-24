@@ -270,29 +270,37 @@ static void avlfunc(rebalance_delete)(struct avl_node()** root) {
 
   avlfunc(update_height)(*root);
 }
-int avl_depth(avl_node* n) {
 int avlfunc(height)(struct avl_node()* n) {
   if (!n) return 0;
   return n->height;
 }
 
-void avl_print(avl* avl, int depth) {
-  avl_print_node(avl->root, 0);
+void avlfunc(print)(FILE* f, avl()* avl) {
+  printf("AVL\n");
+  avlfunc(print_node)(f, avl->root, 0, 1);
 }
-avl avl_new() {
-  avl a = {0};
+avl() avlfunc(new)() {
+  avl() a = {0};
   return a;
 }
 
-void avl_free(avl* avl) {
-  avl_free_node(avl->root);
+void avlfunc(free)(avl()* avl) {
+  avlfunc(free_node)(avl->root);
 }
 
-void avl_insert(avl* avl, int val) {
-  avl_insert_node(&avl->root, val);
+void avlfunc(insert)(avl()* avl, int val) {
+  struct avl_node()* n = avlfunc(insert_node)(&avl->root, 0, val);
+  if (!n) return;
+  avlfunc(rebalance_insert)(avl, n);
 }
 
-void avl_remove(avl* avl, int val) {
+void avlfunc(delete)(avl()* avl, int val) {
+  struct avl_node()* n = avlfunc(delete_node)(&avl->root, 0, val);
+  struct avl_node()* curr = n;
+  while (curr) {
+    avlfunc(rebalance_delete)(avlfunc(link_to)(avl, curr));
+    curr = curr->parent;
+  }
 }
 
 void avl_generate_graph_node(avl_node* n, FILE* f) {
