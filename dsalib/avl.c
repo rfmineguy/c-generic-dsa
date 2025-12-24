@@ -1,9 +1,8 @@
 #include "avl.h"
-#include "queue_avl_node.h"
+#include <assert.h>
 #include <stdlib.h>
 #include <stdio.h>
 
-static void avl_free_node(avl_node* n) {
 #define HPIPE "\u2014"
 #define XPIPE "\u0371"
 #define N     "\u221F"
@@ -56,7 +55,6 @@ static void avlfunc(free_node)(struct avl_node()* n) {
   free(n);
 }
 
-static void avl_insert_node(avl_node** n, int val) {
 static void avlfunc(update_height)(struct avl_node()* n) {
   if (!n) return;
   int hl = avlfunc(height)(n->left);
