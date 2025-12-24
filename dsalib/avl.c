@@ -65,21 +65,33 @@ static void avlfunc(update_height)(struct avl_node()* n) {
   n->height = max + 1;
 }
 
+static struct avl_node()* avlfunc(insert_node)(struct avl_node()** n, struct avl_node()* parent, int val) {
   if (!(*n)) {
-    *n = calloc(1, sizeof(avl_node));
+    *n = calloc(1, sizeof(struct avl_node()));
+    if (!(*n)) return 0;
     (*n)->val = val;
-    return;
+    (*n)->parent = parent;
+    (*n)->count = 1;
+    (*n)->height = 1;
+    return *n;
   }
-  if (val < (*n)->val) 
-    avl_insert_node(&(*n)->left, val);
-  if (val >= (*n)->val) 
-    avl_insert_node(&(*n)->right, val);
+  int cmp = avlfunc(cmp)(val, (*n)->val);
+  struct avl_node()* inserted = 0;
+  if (cmp == 0) {
+    (*n)->count++;
+    inserted = *n;
+  }
+  if (cmp < 0) {
+    inserted = avlfunc(insert_node)(&(*n)->left, *n, val);
+  }
+  if (cmp > 0){
+    inserted = avlfunc(insert_node)(&(*n)->right, *n, val);
+  }
+
+  avlfunc(update_height)(*n);
+  return inserted;
 }
 
-static void avl_print_node(avl_node* n, int depth) {
-  if (!n) {
-    printf("%*.s|_ None\n", 2 * (depth), " ");
-    return;
 static struct avl_node()* avlfunc(delete_node)(struct avl_node()** root, struct avl_node()* parent, avl_type_type v) {
   if (!(*root)) return 0;
   int cmp = avlfunc(cmp)(v, (*root)->val);
