@@ -309,15 +309,117 @@ void avl_generate_graph_node(avl_node* n, FILE* f) {
   if (n->left) avl_generate_graph_node(n->left, f);
   if (n->right) avl_generate_graph_node(n->right, f);
   fprintf(f, "\t}\n");
+static avl_iter() avlfunc(next_bfs)(avl()* b, avl_iter() it) {
+  if (qfunc(empty)(&it.dsa.q)) {
+    return (avl_iter()) {.dsa.q = it.dsa.q, .node = 0, .end = 1, .iter_type = it.iter_type};
+  }
+  it.node = qfunc(dequeue)(&it.dsa.q)->val;
+  if (it.node->left)  qfunc(enqueue)(&it.dsa.q, it.node->left);
+  if (it.node->right) qfunc(enqueue)(&it.dsa.q, it.node->right);
+  return it;
+}
+
+static avl_iter() avlfunc(next_dfs_inorder)(avl()* b, avl_iter() it) {
+  if (!stackfunc(top)(&it.dsa.stack)) 
+    return (avl_iter()) {.dsa.stack = it.dsa.stack, .node = 0, .end = 1, .iter_type = it.iter_type};
+
+  avl_node()* n = stackfunc(pop)(&it.dsa.stack)->val;
+  if (!n) {
+    it.end = 1;
+    return it;
+  }
+  it.node = n;
+
+  avl_node()* right = n->right;
+  while (right) {
+    stackfunc(push)(&it.dsa.stack, right);
+    right = right->left;
+  }
+  return it;
 }
 
 void avl_generate_graph(avl* avl, FILE* f) {
   q_avl_node q = q_avl_node_new();
   q_avl_node_free(&q);
+static avl_iter() avlfunc(next_dfs_preorder)(avl()* b, avl_iter() it) {
+  if (!stackfunc(top)(&it.dsa.stack)) 
+    return (avl_iter()) {.dsa.stack = it.dsa.stack, .node = 0, .end = 1, .iter_type = it.iter_type};
 
   fprintf(f, "digraph D{\n");
   avl_generate_graph_node(avl->root, f);
   fprintf(f, "}");
+  avl_node()* n = stackfunc(pop)(&it.dsa.stack)->val;
+  it.node = n;
 
   q_avl_node_free(&q);
+  if (n->right) stackfunc(push)(&it.dsa.stack, n->right);
+  if (n->left) stackfunc(push)(&it.dsa.stack, n->left);
+
+  return it;
+}
+
+static avl_iter() avlfunc(next_dfs_postorder)(avl()* b, avl_iter() it) {
+  return (avl_iter()){};
+}
+
+avl_iter() avlfunc(begin)(avl()* b, avl_iter_type iter_type) {
+  avl_iter() it = {};
+  it.iter_type = iter_type;
+  it.end = 0;
+  switch (it.iter_type) {
+    case AVL_BFS: {
+      qfunc(free)(&it.dsa.q);
+      it.dsa.q = qfunc(new)();
+      it.node = b->root;
+      if (b->root) {
+        if (b->root->left) qfunc(enqueue)(&it.dsa.q, b->root->left);
+        if (b->root->right) qfunc(enqueue)(&it.dsa.q, b->root->right);
+      }
+      else {
+        it.end = 1;
+      }
+      break;
+    }
+    case AVL_INORDER: {
+      stackfunc(free)(&it.dsa.stack);
+      it.dsa.stack = stackfunc(new)();
+      avl_node()* curr = b->root;
+      while (curr) {
+        stackfunc(push)(&it.dsa.stack, curr);
+        curr = curr->left;
+      }
+      it.node = stackfunc(pop)(&it.dsa.stack)->val;
+      if (!it.node) it.end = 1;
+      break;
+    }
+    case AVL_PREORDER: {
+      stackfunc(free)(&it.dsa.stack);
+      it.dsa.stack = stackfunc(new)();
+      it.node = b->root;
+      if (b->root) {
+        if (b->root->left) stackfunc(push)(&it.dsa.stack, b->root->left);
+        if (b->root->right) stackfunc(push)(&it.dsa.stack, b->root->right);
+      }
+      else {
+        it.end = 1;
+      }
+      break;
+    }
+    default: assert(0 && "Not implmented");
+  }
+  return it;
+}
+
+int avlfunc(end)(avl()* b, avl_iter() it) {
+  return it.end;
+}
+
+avl_iter() avlfunc(next)(avl()* b, avl_iter() it) {
+  switch (it.iter_type) {
+    case AVL_BFS:          return avlfunc(next_bfs)(b, it); break;
+    case AVL_INORDER:  return avlfunc(next_dfs_inorder)(b, it); break;
+    case AVL_PREORDER: return avlfunc(next_dfs_preorder)(b, it); break;
+    case AVL_POSTORDER: return avlfunc(next_dfs_postorder)(b, it); break;
+    default: assert(0 && "Not implmented");
+  }
 }
