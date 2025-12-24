@@ -51,8 +51,8 @@ void avlfunc(print_node)(FILE* f, struct avl_node()* root, int depth, int is_las
 
 static void avlfunc(free_node)(struct avl_node()* n) {
   if (!n) return;
-  avl_free_node(n->left);
-  avl_free_node(n->right);
+  avlfunc(free_node)(n->left);
+  avlfunc(free_node)(n->right);
   free(n);
 }
 
