@@ -4,6 +4,52 @@
 #include <stdio.h>
 
 static void avl_free_node(avl_node* n) {
+#define HPIPE "\u2014"
+#define XPIPE "\u0371"
+#define N     "\u221F"
+#define ELBOW "\u23B8"
+
+static int var(avl, rec_depth)[1000];
+
+void avlfunc(print_node)(FILE* f, struct avl_node()* root, int depth, int is_last) {
+    if (!root) return;
+
+    for (int i = 0; i < depth; i++) {
+        if (i == depth - 1) {
+            // bottom connector
+            printf("%s", is_last ? "└──" : "├──");
+        } else {
+            // ancestor levels
+            printf("%s", var(avl, rec_depth)[i] ? "│  " : "   ");
+        }
+    }
+
+    avlfunc(print_val)(f, root->val);
+    if (root->count > 1) printf(" (%d)", root->count);
+    printf("[%d]", avlfunc(height)(root));
+    printf("\n");
+
+    // Mark whether at this depth we should draw a vertical continuation later
+    if (depth >= 0) var(avl, rec_depth)[depth] = !is_last;
+
+    // Count children to determine who is last
+    int has_left  = root->left  != NULL;
+    int has_right = root->right != NULL;
+
+    if (has_left) {
+      var(avl, rec_depth)[depth] = has_right ? 1 : 0;
+      avlfunc(print_node)(f, root->left, depth + 1, has_right ? 0 : 1);
+      var(avl, rec_depth)[depth] = 0;
+    }
+
+    if (has_right) {
+      var(avl, rec_depth)[depth] = 0;
+      avlfunc(print_node)(f, root->right, depth + 1, 1); // right child is always last
+      var(avl, rec_depth)[depth] = 0;
+    }
+}
+
+static void avlfunc(free_node)(struct avl_node()* n) {
   if (!n) return;
   avl_free_node(n->left);
   avl_free_node(n->right);
