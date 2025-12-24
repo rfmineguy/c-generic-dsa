@@ -191,16 +191,89 @@ static int avlfunc(bf)(struct avl_node()* root) {
   if (!root) return 0;
   return avlfunc(height)(root->left) - avlfunc(height)(root->right);
 }
+static void avlfunc(rebalance_insert)(avl()* avl, struct avl_node()* n) {
+  if (!n->parent) return;
+  if (!n->parent->parent) return;
+
+  struct avl_node()* gp = n->parent->parent;
+  struct avl_node()* old_gp = gp;
+  struct avl_node()* gpp = gp->parent;
+
+  while (gp) {
+    old_gp = gp;
+    gpp = gp->parent;
+    int bf = avlfunc(bf)(gp);
+
+    if (bf > 1 && n->val < gp->left->val) {
+      gp = avlfunc(rotate_right)(gp);
+    }
+    if (bf < -1 && n->val > gp->right->val) {
+      gp = avlfunc(rotate_left)(gp);
+    }
+    if (bf > 1 && n->val > gp->left->val) {
+      gp->left = avlfunc(rotate_left)(gp->left);
+      gp = avlfunc(rotate_right)(gp);
+    }
+    if (bf < -1 && n->val < gp->right->val) {
+      gp->right = avlfunc(rotate_right)(gp->right);
+      gp = avlfunc(rotate_left)(gp);
+    }
+
+    if (gpp == NULL) {
+      avl->root = gp;
+      gp->parent = NULL;
+    }
+    else if (gpp->left == old_gp) {
+      gpp->left = gp;
+      gp->parent = gpp;
+    }
+    else {
+      gpp->right = gp;
+      gp->parent = gpp;
+    }
+
+    gp = gp->parent;
   }
-  printf("%*.s|_ %d\n", 2 * depth, " ", n->val);
-  avl_print_node(n->left, depth + 1);
-  avl_print_node(n->right, depth + 1);
+}
+static struct avl_node() **avlfunc(link_to)(avl() *avl, struct avl_node() *n) {
+  if (!n->parent)
+    return &avl->root;
+
+  if (n->parent->left == n)
+    return &n->parent->left;
+
+  return &n->parent->right;
+}
+static void avlfunc(rebalance_delete)(struct avl_node()** root) {
+  struct avl_node()* n = *root;
+  int h_l = avlfunc(height)(n->left);
+  int h_r = avlfunc(height)(n->right);
+  int bf   = avlfunc(bf)(n);
+  if (bf > 1) {
+    if (avlfunc(height)(n->left->left) >= avlfunc(height)(n->left->right)) {
+      *root = avlfunc(rotate_right)(n);
+    }
+    else {
+      (*root)->left = avlfunc(rotate_left)(n->left);
+      *root = avlfunc(rotate_right)(n);
+    }
+  }
+  else if (bf < -1) {
+    if (avlfunc(height)(n->right->right) >= avlfunc(height)(n->right->left)) {
+      *root = avlfunc(rotate_left)(n);
+    }
+    else {
+      (*root)->right = avlfunc(rotate_right)(n->right);
+      *root = avlfunc(rotate_left)(n);
+    }
+  }
+
+  avlfunc(update_height)(*root);
 }
 int avl_depth(avl_node* n) {
+int avlfunc(height)(struct avl_node()* n) {
   if (!n) return 0;
-  int left = avl_depth(n->left);
-  int right = avl_depth(n->right);
-  return (left > right ? left : right) + 1;
+  return n->height;
 }
 
 void avl_print(avl* avl, int depth) {
