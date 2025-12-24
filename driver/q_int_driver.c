@@ -8,6 +8,6 @@ void q_int_driver() {
   q_int_enqueue(&q, 2);
   q_int_enqueue(&q, 1);
   q_int_dequeue(&q);
-  q_int_print(&q);
+  q_int_print(stdout, &q);
   q_int_free(&q);
 }

@@ -1,4 +1,5 @@
 #include <stdbool.h>
+#include <stdio.h>
 #include "dsa.h"
 #undef func
 #undef q
@@ -31,7 +32,7 @@ typedef struct q() {
   q_node() *head, *tail;
 } q();
 
-void        qfunc(print_node_val)(q_type_type val);
+void        qfunc(print_node_val)(FILE* f, q_type_type val);
 
 q()         qfunc(new)();
 void        qfunc(free)(q()* q);
@@ -40,4 +41,4 @@ q_node()*   qfunc(dequeue)(q()* q);
 q_type_type*qfunc(front)(const q()* q);
 bool        qfunc(empty)(const q()* q);
 
-void        qfunc(print)(q()* q);
+void        qfunc(print)(FILE* f, q()* q);

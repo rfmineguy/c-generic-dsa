@@ -3,8 +3,8 @@
 #define Q_ALLOW_DIRECT_INCLUDE
 #include <stdio.h>
 
-void q_int_print_node_val(int val) {
-  printf("%d", val);
+void q_int_print_node_val(FILE* f, int val) {
+  fprintf(f, "%d", val);
 }
 
 #include "../dsalib/queue.c"

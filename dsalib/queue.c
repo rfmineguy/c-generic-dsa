@@ -49,9 +49,9 @@ q_type_type* qfunc(front)(const q() *q) {
 bool qfunc(empty)(const q() *q) {
   return q->head == q->tail && !q->head;
 }
-void qfunc(print)(q() *q) {
+void qfunc(print)(FILE* f, q() *q) {
   for (q_node()* n = q->head; n != q->tail; n = n->next) {
-    qfunc(print_node_val)(n->val);
+    qfunc(print_node_val)(f, n->val);
     if (n->next) printf(", ");
   }
   printf("\n");
