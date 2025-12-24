@@ -186,6 +186,11 @@ struct avl_node()* avlfunc(rotate_left)(struct avl_node()* n) {
 
   return newroot;
 }
+
+static int avlfunc(bf)(struct avl_node()* root) {
+  if (!root) return 0;
+  return avlfunc(height)(root->left) - avlfunc(height)(root->right);
+}
   }
   printf("%*.s|_ %d\n", 2 * depth, " ", n->val);
   avl_print_node(n->left, depth + 1);
