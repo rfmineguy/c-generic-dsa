@@ -147,6 +147,45 @@ static struct avl_node()* avlfunc(delete_node)(struct avl_node()** root, struct 
     return parent;
   }
 }
+
+/*
+ *   A
+ *  / \
+ * Y   B
+ *    / \
+ *   X   C
+ */
+struct avl_node()* avlfunc(rotate_right)(struct avl_node()* n) {
+  struct avl_node()* newroot = n->left;   // Y
+  struct avl_node()* right = newroot->right;
+
+  newroot->right = n;
+  newroot->parent = n->parent;
+  n->left = right;
+  n->parent = newroot;
+  if (right) right->parent = newroot;
+
+  avlfunc(update_height)(n);
+  avlfunc(update_height)(newroot);
+
+  return newroot;
+}
+
+struct avl_node()* avlfunc(rotate_left)(struct avl_node()* n) {
+  struct avl_node()* newroot = n->right;   // Y
+  struct avl_node()* left = newroot->left;
+
+  newroot->left = n;
+  newroot->parent = n->parent;
+  n->right = left;
+  n->parent = newroot;
+  if (left) left->parent = newroot;
+
+  avlfunc(update_height)(n);
+  avlfunc(update_height)(newroot);
+
+  return newroot;
+}
   }
   printf("%*.s|_ %d\n", 2 * depth, " ", n->val);
   avl_print_node(n->left, depth + 1);
