@@ -57,6 +57,14 @@ static void avlfunc(free_node)(struct avl_node()* n) {
 }
 
 static void avl_insert_node(avl_node** n, int val) {
+static void avlfunc(update_height)(struct avl_node()* n) {
+  if (!n) return;
+  int hl = avlfunc(height)(n->left);
+  int hr = avlfunc(height)(n->right);
+  int max = (hl > hr ? hl : hr);
+  n->height = max + 1;
+}
+
   if (!(*n)) {
     *n = calloc(1, sizeof(avl_node));
     (*n)->val = val;
