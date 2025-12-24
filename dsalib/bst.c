@@ -83,7 +83,7 @@ static struct bst_node()* bstfunc(delete_node)(struct bst_node()** root, bst_typ
   }
 }
 
-static void bstfunc(print_node)(struct bst_node()* root, int depth, int is_last) {
+static void bstfunc(print_node)(FILE* f, struct bst_node()* root, int depth, int is_last) {
     if (!root) return;
 
     for (int i = 0; i < depth; i++) {
@@ -96,7 +96,7 @@ static void bstfunc(print_node)(struct bst_node()* root, int depth, int is_last)
         }
     }
 
-    bstfunc(print_val)(root->val);
+    bstfunc(print_val)(f, root->val);
     printf(" (%d)\n", root->count);
 
     // Mark whether at this depth we should draw a vertical continuation later
@@ -108,13 +108,13 @@ static void bstfunc(print_node)(struct bst_node()* root, int depth, int is_last)
 
     if (has_left) {
       var(bst, rec_depth)[depth] = has_right ? 1 : 0;
-      bstfunc(print_node)(root->left, depth + 1, has_right ? 0 : 1);
+      bstfunc(print_node)(f, root->left, depth + 1, has_right ? 0 : 1);
       var(bst, rec_depth)[depth] = 0;
     }
 
     if (has_right) {
       var(bst, rec_depth)[depth] = 0;
-      bstfunc(print_node)(root->right, depth + 1, 1); // right child is always last
+      bstfunc(print_node)(f, root->right, depth + 1, 1); // right child is always last
       var(bst, rec_depth)[depth] = 0;
     }
 }
@@ -138,22 +138,22 @@ bst_type_type* bstfunc(search)(bst()* b, bst_type_type v) {
   if (!n) return 0;
   return &n->val;
 }
-void bstfunc(print)(bst()* b) {
+void bstfunc(print)(FILE* f, bst()* b) {
   memset(var(bst, rec_depth), 0, 1000);
   printf("------------\n");
-  if (b->root)  bstfunc(print_node)(b->root, 0, 1);
+  if (b->root)  bstfunc(print_node)(f, b->root, 0, 1);
   printf("------------\n");
 }
 
-void bstfunc(print_dot)(bst()* b) {
+void bstfunc(print_dot)(FILE* f, bst()* b) {
   printf("digraph {\n");
   for (bst_iter() it = bstfunc(begin)(b, BFS); !bstfunc(end)(b, it); it = bstfunc(next)(b, it)) {
-    bstfunc(print_val)(it.node->val);
+    bstfunc(print_val)(f, it.node->val);
     printf(" -> {");
-    if (it.node->left)  bstfunc(print_val)(it.node->left->val);
+    if (it.node->left)  bstfunc(print_val)(f, it.node->left->val);
     if (it.node->right) {
       printf(", ");
-      bstfunc(print_val)(it.node->right->val);
+      bstfunc(print_val)(f, it.node->right->val);
     }
     printf(" }\n");
   }
@@ -206,7 +206,7 @@ static bst_iter() bstfunc(next_dfs_postorder)(bst()* b, bst_iter() it) {
   return (bst_iter()){};
 }
 
-bst_iter() bstfunc(begin)(bst()* b, itertype iter_type) {
+bst_iter() bstfunc(begin)(bst()* b, bst_itertype iter_type) {
   bst_iter() it = {};
   it.iter_type = iter_type;
   it.end = 0;

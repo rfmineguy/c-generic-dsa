@@ -1,6 +1,7 @@
 #ifndef BST_TEMPLATE_H
 #define BST_TEMPLATE_H
 #include "dsa.h"
+#include <stdio.h>
 
 #ifndef bst_type_type
 #define bst_type_type int
@@ -24,7 +25,7 @@ typedef enum {
   DFS_INORDER,
   DFS_PREORDER,
   DFS_POSTORDER,
-} itertype;
+} bst_itertype;
 
 struct bst_node() {
   bst_type_type val;
@@ -33,7 +34,7 @@ struct bst_node() {
 };
 
 typedef struct bst_iter() {
-  itertype iter_type;
+  bst_itertype iter_type;
   int end;
   union {
     q() q;
@@ -55,11 +56,11 @@ void       bstfunc(insert)(bst()* b, bst_type_type);
 bst_node()*bstfunc(delete)(bst()* b, bst_type_type);
 bst_type_type* bstfunc(search)(bst()* b, bst_type_type);
 
-void       bstfunc(print_val)(bst_type_type);
-void       bstfunc(print)(bst()* b);
-void       bstfunc(print_dot)(bst()* b);
+void       bstfunc(print_val)(FILE*, bst_type_type);
+void       bstfunc(print)(FILE* f, bst()* b);
+void       bstfunc(print_dot)(FILE* f, bst()* b);
 
-bst_iter() bstfunc(begin)(bst()* b, itertype iter_type);
+bst_iter() bstfunc(begin)(bst()* b, bst_itertype iter_type);
 int        bstfunc(end)(bst()* b, bst_iter() it);
 bst_iter() bstfunc(next)(bst()* b, bst_iter() it);
 

@@ -62,27 +62,27 @@ void bst_str_driver_no_iterator() {
   bst_str_insert(&bst, "general");
   bst_str_insert(&bst, "cookie");
   bst_str_insert(&bst, "brownie");
-  bst_str_print(&bst);
-  bst_str_print_dot(&bst);
+  bst_str_print(stdout, &bst);
+  bst_str_print_dot(stdout, &bst);
 
   bst_str_delete(&bst, "brownie");
   bst_str_delete(&bst, "horror");
   bst_str_delete(&bst, "general");
-  bst_str_print(&bst);
+  bst_str_print(stdout, &bst);
 
   bst_str_delete(&bst, "cookie");
   bst_str_delete(&bst, "cookie");
-  bst_str_print(&bst);
+  bst_str_print(stdout, &bst);
 
   bst_str_delete(&bst, "moniker");
-  bst_str_print(&bst);
+  bst_str_print(stdout, &bst);
 
   bst_str_delete(&bst, "looker");
   bst_str_delete(&bst, "pawn");
-  bst_str_print(&bst);
+  bst_str_print(stdout, &bst);
 
   bst_str_delete(&bst, "general");
-  bst_str_print(&bst);
+  bst_str_print(stdout, &bst);
   bst_str_free(&bst);
 
   bst = bst_str_new();

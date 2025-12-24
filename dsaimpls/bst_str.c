@@ -20,14 +20,14 @@ int bst_str_cmp(const char* a, const char* b) {
   return v;
 }
 
-void bst_str_print_val(const char* val) {
+void bst_str_print_val(FILE* f, const char* val) {
   printf("%s", val);
 }
 
-void q_bst_str_node_print_node_val(bst_str_node* val) {
-  bst_str_print_val(val->val);
+void q_bst_str_node_print_node_val(FILE* f, bst_str_node* val) {
+  bst_str_print_val(f, val->val);
 }
-void stack_bst_str_node_print_node_val(bst_str_node* val) {
-  bst_str_print_val(val->val);
+void stack_bst_str_node_print_node_val(FILE* f, bst_str_node* val) {
+  bst_str_print_val(f, val->val);
 }
 #include "../dsalib/bst.c"

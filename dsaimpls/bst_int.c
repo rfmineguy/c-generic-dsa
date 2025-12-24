@@ -22,16 +22,16 @@ int bst_int_cmp(int a, int b) {
   return 0;
 }
 
-void bst_int_print_val(int val) {
-  printf("%d", val);
+void bst_int_print_val(FILE* f, int val) {
+  fprintf(f, "%d", val);
 }
 
-void q_bst_int_node_print_node_val(bst_int_node* val) {
-  bst_int_print_val(val->val);
+void q_bst_int_node_print_node_val(FILE* f, bst_int_node* val) {
+  bst_int_print_val(f, val->val);
 }
 
-void stack_bst_int_node_print_node_val(bst_int_node* val) {
-  bst_int_print_val(val->val);
+void stack_bst_int_node_print_node_val(FILE* f, bst_int_node* val) {
+  bst_int_print_val(f, val->val);
 }
 
 #define ALLOW_DIRECT_INCLUDE
